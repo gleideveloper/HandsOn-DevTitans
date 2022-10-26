@@ -7,12 +7,9 @@
 #include "nvs_flash.h"
 #include "driver/gpio.h"
 
-#define LED_GPIO_PIN                     23
+#define LED_GPIO_PIN                     5
 #define WIFI_CHANNEL_SWITCH_INTERVAL  (500)
 #define WIFI_CHANNEL_MAX               (13)
-
-
-// https://github.com/ESP-EOS/ESP32-WiFi-Sniffer/blob/master/WIFI_SNIFFER_ESP32.ino
 
 uint8_t level = 0, channel = 1;
 
@@ -111,7 +108,7 @@ void setup() {
   pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
-// the loop function runs over and over again forever 
+// the loop function runs over and over again forever
 void loop() {
   //Serial.print("inside loop");
   delay(1000); // wait for a second

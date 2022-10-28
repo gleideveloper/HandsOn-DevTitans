@@ -36,13 +36,11 @@ static void wifi_sniffer_set_channel(uint8_t channel);
 static const char *wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type);
 static void wifi_sniffer_packet_handler(void *buff, wifi_promiscuous_pkt_type_t type);
 
-esp_err_t event_handler(void *ctx, system_event_t *event)
-{
+esp_err_t event_handler(void *ctx, system_event_t *event){
   return ESP_OK;
 }
 
-void wifi_sniffer_init(void)
-{
+void wifi_sniffer_init(void){
   nvs_flash_init();
   tcpip_adapter_init();
   ESP_ERROR_CHECK( esp_event_loop_init(event_handler, NULL) );
@@ -56,13 +54,11 @@ void wifi_sniffer_init(void)
   esp_wifi_set_promiscuous_rx_cb(&wifi_sniffer_packet_handler);
 }
 
-void wifi_sniffer_set_channel(uint8_t channel)
-{
+void wifi_sniffer_set_channel(uint8_t channel){
   esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
 }
 
-const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type)
-{
+const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type){
   switch(type) {
   case WIFI_PKT_MGMT: return "MGMT";
   case WIFI_PKT_DATA: return "DATA";
@@ -71,8 +67,7 @@ const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type)
   }
 }
 
-void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type)
-{
+void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   if (type != WIFI_PKT_MGMT)
     return;
 
@@ -80,23 +75,17 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type)
   const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
   const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
 
-  printf("PACKET TYPE=%s, CHAN=%02d, RSSI=%02d,"
-    " ADDR1=%02x:%02x:%02x:%02x:%02x:%02x,"
-    " ADDR2=%02x:%02x:%02x:%02x:%02x:%02x,"
-    " ADDR3=%02x:%02x:%02x:%02x:%02x:%02x\n",
-    wifi_sniffer_packet_type2str(type),
-    ppkt->rx_ctrl.channel,
+  char macAddress [60];
+  sprintf(macAddress, "RSSI=%02d|MacAdress=%02x:%02x:%02x:%02x:%02x:%02x | %02x:%02x:%02x:%02x:%02x:%02x",
+    /* RSSI */
     ppkt->rx_ctrl.rssi,
     /* ADDR1 */
-    hdr->addr1[0],hdr->addr1[1],hdr->addr1[2],
-    hdr->addr1[3],hdr->addr1[4],hdr->addr1[5],
+    hdr->addr1[0],hdr->addr1[1],hdr->addr1[2],hdr->addr1[3],hdr->addr1[4],hdr->addr1[5],
     /* ADDR2 */
-    hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],
-    hdr->addr2[3],hdr->addr2[4],hdr->addr2[5],
-    /* ADDR3 */
-    hdr->addr3[0],hdr->addr3[1],hdr->addr3[2],
-    hdr->addr3[3],hdr->addr3[4],hdr->addr3[5]
+    hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
+
+  Serial.printf ("[ %s ]\n",macAddress);
 }
 
 // the setup function runs once when you press reset or power the board

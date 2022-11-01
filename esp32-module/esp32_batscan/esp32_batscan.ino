@@ -76,16 +76,14 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
 
   char macAddress [60];
-  sprintf(macAddress, "RSSI=%02d|MacAdress=%02x:%02x:%02x:%02x:%02x:%02x | %02x:%02x:%02x:%02x:%02x:%02x",
+  sprintf(macAddress, "%02d|%02x:%02x:%02x:%02x:%02x:%02x",
     /* RSSI */
     ppkt->rx_ctrl.rssi,
-    /* ADDR1 */
-    hdr->addr1[0],hdr->addr1[1],hdr->addr1[2],hdr->addr1[3],hdr->addr1[4],hdr->addr1[5],
     /* ADDR2 */
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
 
-  Serial.printf ("[ %s ]\n",macAddress);
+  Serial.printf ("%s\n",macAddress);
 }
 
 // the setup function runs once when you press reset or power the board

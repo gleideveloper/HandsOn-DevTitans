@@ -35,6 +35,7 @@ static void wifi_sniffer_init(void);
 static void wifi_sniffer_set_channel(uint8_t channel);
 static const char *wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type);
 static void wifi_sniffer_packet_handler(void *buff, wifi_promiscuous_pkt_type_t type);
+char macAddress [60];
 
 esp_err_t event_handler(void *ctx, system_event_t *event){
   return ESP_OK;
@@ -74,8 +75,7 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   const wifi_promiscuous_pkt_t *ppkt = (wifi_promiscuous_pkt_t *)buff;
   const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
   const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
-
-  char macAddress [60];
+  
   sprintf(macAddress, "%02d|%02x:%02x:%02x:%02x:%02x:%02x",
     /* RSSI */
     ppkt->rx_ctrl.rssi,
@@ -83,7 +83,7 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
 
-  Serial.printf ("%s\n",macAddress);
+  //Serial.printf ("%s\n",macAddress);
 }
 
 // the setup function runs once when you press reset or power the board
@@ -97,14 +97,27 @@ void setup() {
 
 // the loop function runs over and over again forever
 void loop() {
-  //Serial.print("inside loop");
-  delay(1000); // wait for a second
-  
-  if (digitalRead(LED_GPIO_PIN) == LOW)
-    digitalWrite(LED_GPIO_PIN, HIGH);
-  else
-    digitalWrite(LED_GPIO_PIN, LOW);
-  vTaskDelay(WIFI_CHANNEL_SWITCH_INTERVAL / portTICK_PERIOD_MS);
-  wifi_sniffer_set_channel(channel);
-  channel = (channel % WIFI_CHANNEL_MAX) + 1;
+  String serialCommand;
+
+    while (Serial.available() > 0) {
+        char serialChar = Serial.read();
+        serialCommand += serialChar; 
+
+        if (serialChar == '\n') {
+            processCommand(serialCommand);
+            serialCommand = "";
+        }
+    }
+    delay(100);
+}
+
+void processCommand(String command) {
+    command.trim();
+    command.toUpperCase();
+    if (command == "GET_RSSI_MAC"){
+      Serial.printf("RES GET_RSSI_MAC %s\n", macAddress);
+    }else{
+      Serial.println("ERR Unknown command.");
+    }
+      
 }

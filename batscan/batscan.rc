@@ -1,0 +1,6 @@
+on early-init
+    export DEV_TITANS "DevTITANS Batscan! v1.0",
+    export TERMINFO "/product/etc/terminfo/"
+
+on property:dev.bootcomplete=1
+    exec /system/bin/log -p d -t "DevTITANS" "DevTITANS Batscan! inicializado."

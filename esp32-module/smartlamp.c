@@ -8,10 +8,12 @@ MODULE_LICENSE("GPL");
 
 // Tamanho máximo de uma linha de resposta do dispositvo USB
 #define MAX_RECV_LINE 100
-
-static int  usb_probe(struct usb_interface *ifce, const struct usb_device_id *id); // Executado quando o dispositivo é conectado na USB
-static void usb_disconnect(struct usb_interface *ifce);                            // Executado quando o dispositivo USB é desconectado da USB
-static int  usb_send_cmd(char *cmd, int param);                                    // Envia um comando via USB e espera/retorna a resposta do dispositivo (int)
+// Executado quando o dispositivo é conectado na USB
+static int  usb_probe(struct usb_interface *ifce, const struct usb_device_id *id); 
+// Executado quando o dispositivo USB é desconectado da USB
+static void usb_disconnect(struct usb_interface *ifce);
+// Envia um comando via USB e espera/retorna a resposta do dispositivo (int)
+static int  usb_send_cmd(char *cmd, int param);
 // Executado quando o arquivo /sys/kernel/smartlamp/{led, ldr, threshold} é lido (e.g., cat /sys/kernel/smartlamp/led)
 static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, char *buff);
 // Executado quando o arquivo /sys/kernel/smartlamp/{led, ldr, threshold} é escrito (e.g., echo "100" | sudo tee -a /sys/kernel/smartlamp/led)
@@ -92,7 +94,7 @@ static int usb_send_cmd(char *cmd, int param) {
     if (param >= 0) sprintf(usb_out_buffer, "%s %d\n", cmd, param); // Se param >=0, o comando possui um parâmetro (int)
     else sprintf(usb_out_buffer, "%s\n", cmd);                      // Caso contrário, é só o comando mesmo
 
-    // Envia o comando (usb_out_buffer) para a USB
+    // Envia o comando (usb_out_buffer) para a
     ret = usb_bulk_msg(smartlamp_device, usb_sndbulkpipe(smartlamp_device, usb_out), usb_out_buffer, strlen(usb_out_buffer), &actual_size, 1000*HZ);
     if (ret) {
         printk(KERN_ERR "SmartLamp: Erro de codigo %d ao enviar comando!\n", ret);

@@ -4,22 +4,22 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk_phone_x86_64.mk)
 # Sobrescreve algumas variáveis com os dados do novo produto
 PRODUCT_NAME := devtitans_batscan
 PRODUCT_DEVICE := batscan
-PRODUCT_BRAND := batscanBrand
-PRODUCT_MODEL := batscanModel
+PRODUCT_BRAND := BatscanBrand
+PRODUCT_MODEL := BatscanModel
 
 # Copia o arquivo devtitans.txt para o /system/etc da imagem do Android
-#PRODUCT_COPY_FILES += \
-#    device/devtitans/kraken/devtitans.txt:system/etc/devtitans.txt \
-#    device/devtitans/kraken/kraken.rc:vendor/etc/init/kraken.rc \
-#    device/devtitans/kraken/bootanimation.zip:product/media/bootanimation.zip \
-#    device/devtitans/kraken/default_wallpaper.png:product/media/default_wallpaper.png
+PRODUCT_COPY_FILES += \
+    device/devtitans/HandsOn-DevTitans/batscan/devtitans.txt:system/etc/devtitans.txt \
+    device/devtitans/HandsOn-DevTitans/batscan/batscan.rc:vendor/etc/init/batscan.rc \
+    device/devtitans/HandsOn-DevTitans/batscan/bootanimation.zip:product/media/bootanimation.zip \
+    device/devtitans/HandsOn-DevTitans/batscan/default_wallpaper.png:product/media/default_wallpaper.png
 #
-#PRODUCT_SYSTEM_PROPERTIES += \
-#    ro.devtitans.name=Kraken \
-#    ro.config.wallpaper=product/media/default_wallpaper.png
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.devtitans.name=Batscan \
+    ro.config.wallpaper=product/media/default_wallpaper.png
 #
-#PRODUCT_PRODUCT_PROPERTIES += \
-#    ro.product.devtitans.version=1.0
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.product.devtitans.version=1.0
 #
 #PRODUCT_VENDOR_PROPERTIES += \
 #    ro.vendor.devtitans.hardware=ModelB

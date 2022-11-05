@@ -114,8 +114,8 @@ void loop() {
 void processCommand(String command) {
     command.trim();
     command.toUpperCase();
-    if (command == "GET_RSSI_MAC"){
-      Serial.printf("RES GET_RSSI_MAC %s\n", macAddress);
+    if (command == "GET_SCAN"){
+      Serial.printf("RES GET_SCAN %s\n", macAddress);
     }else{
       Serial.println("ERR Unknown command.");
     }

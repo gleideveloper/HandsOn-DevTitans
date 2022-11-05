@@ -125,7 +125,7 @@ static int usb_send_cmd(char *cmd, int param) {
 
                     // Acessa a parte da resposta que contém o número e converte para inteiro
                     resp_pos = &recv_line[strlen(resp_expected) + 1];
-                    strcpy(resp_pos, resp_number);
+                    strcpy(resp_pos, resp_str);
                     //kstrtol(resp_pos, 10, &resp_number)
                     return resp_str;
                 }

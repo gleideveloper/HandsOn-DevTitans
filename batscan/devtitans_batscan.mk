@@ -21,8 +21,8 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.product.devtitans.version=1.0
 #
-#PRODUCT_VENDOR_PROPERTIES += \
-#    ro.vendor.devtitans.hardware=ModelB
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.vendor.devtitans.hardware=ModelB
 #
 ## Seta o diretório de overlays
 #PRODUCT_PACKAGE_OVERLAYS = device/devtitans/kraken/overlay

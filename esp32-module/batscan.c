@@ -27,9 +27,9 @@ static int usb_max_size;                           // Tamanho máximo de uma men
 
 // Variáveis para criar os arquivos no /sys/kernel/smartlamp/{led, ldr, threshold}
 static struct kobj_attribute  led_attribute = __ATTR(led, S_IRUGO | S_IWUSR, attr_show, attr_store);
-static struct kobj_attribute  ldr_attribute = __ATTR(ldr, S_IRUGO | S_IWUSR, attr_show, attr_store);
-static struct kobj_attribute  threshold_attribute = __ATTR(threshold, S_IRUGO | S_IWUSR, attr_show, attr_store);
-static struct attribute      *attrs[]       = { &led_attribute.attr, &ldr_attribute.attr, &threshold_attribute.attr, NULL };
+//static struct kobj_attribute  ldr_attribute = __ATTR(ldr, S_IRUGO | S_IWUSR, attr_show, attr_store);
+//static struct kobj_attribute  threshold_attribute = __ATTR(threshold, S_IRUGO | S_IWUSR, attr_show, attr_store);
+static struct attribute      *attrs[]       = { &led_attribute.attr, NULL };
 static struct attribute_group attr_group    = { .attrs = attrs };
 static struct kobject        *sys_obj;
 
@@ -87,7 +87,7 @@ static int usb_send_cmd(char *cmd, int param) {
     int retries = 10;                       // Tenta algumas vezes receber uma resposta da USB. Depois desiste.
     char resp_expected[MAX_RECV_LINE];      // Resposta esperada do comando
     char *resp_pos;                         // Posição na linha lida que contém o número retornado pelo dispositivo
-    long resp_number = -1;                  // Número retornado pelo dispositivo (e.g., valor do led, valor do ldr)
+    char resp_str [MAX_RECV_LINE];       // Número retornado pelo dispositivo (e.g., valor do led, valor do ldr)
 
     printk(KERN_INFO "SmartLamp: Enviando comando: %s\n", cmd);
 
@@ -125,9 +125,9 @@ static int usb_send_cmd(char *cmd, int param) {
 
                     // Acessa a parte da resposta que contém o número e converte para inteiro
                     resp_pos = &recv_line[strlen(resp_expected) + 1];
-                    kstrtol(resp_pos, 10, &resp_number);
-
-                    return resp_number;
+                    strcpy(resp_pos, resp_number);
+                    //kstrtol(resp_pos, 10, &resp_number)
+                    return resp_str;
                 }
                 else { // Não é a linha que estávamos esperando. Pega a próxima.
                     printk(KERN_INFO "SmartLamp: Nao eh resposta para %s! Tentiva %d. Proxima linha...\n", cmd, retries--);
@@ -151,13 +151,9 @@ static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, c
     printk(KERN_INFO "SmartLamp: Lendo %s ...\n", attr_name);
 
     if (!strcmp(attr_name, "led"))
-        value = usb_send_cmd("GET_LED", -1);
-    else if (!strcmp(attr_name, "ldr"))
-        value = usb_send_cmd("GET_LDR", -1);
-    else
-        value = usb_send_cmd("GET_THRESHOLD", -1);
+        value = usb_send_cmd("GET_SCAN", -1);
 
-    sprintf(buff, "%d\n", value);                   // Cria a mensagem com o valor do led, ldr ou threshold
+    sprintf(buff, "%s\n", value);                   // Cria a mensagem com o valor do led, ldr ou threshold
     return strlen(buff);
 }
 

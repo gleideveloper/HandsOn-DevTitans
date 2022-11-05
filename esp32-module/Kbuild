@@ -1,1 +1,1 @@
-obj-m += smartlamp.o
+obj-m += batscan.o

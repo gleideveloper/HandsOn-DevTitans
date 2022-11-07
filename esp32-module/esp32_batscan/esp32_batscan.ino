@@ -5,7 +5,6 @@
 #include "esp_event.h"
 #include "esp_event_loop.h"
 #include "nvs_flash.h"
-#include "driver/gpio.h"
 
 #define LED_GPIO_PIN                     5
 #define WIFI_CHANNEL_SWITCH_INTERVAL  (500)

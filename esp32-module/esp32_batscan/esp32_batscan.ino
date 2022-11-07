@@ -35,7 +35,7 @@ static void wifi_sniffer_init(void);
 static void wifi_sniffer_set_channel(uint8_t channel);
 static const char *wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type);
 static void wifi_sniffer_packet_handler(void *buff, wifi_promiscuous_pkt_type_t type);
-char macAddress [60];
+char buffer_rssi_mac [60];
 
 esp_err_t event_handler(void *ctx, system_event_t *event){
   return ESP_OK;
@@ -76,14 +76,14 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
   const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
   
-  sprintf(macAddress, "%02d|%02x:%02x:%02x:%02x:%02x:%02x",
+  sprintf(buffer_rssi_mac, "%02d|%02x:%02x:%02x:%02x:%02x:%02x",
     /* RSSI */
     ppkt->rx_ctrl.rssi,
     /* ADDR2 */
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
 
-  //Serial.printf ("%s\n",macAddress);
+  //Serial.printf ("%s\n",buffer_rssi_mac);
 }
 
 // the setup function runs once when you press reset or power the board
@@ -115,7 +115,7 @@ void processCommand(String command) {
     command.trim();
     command.toUpperCase();
     if (command == "GET_SCAN"){
-      Serial.printf("RES GET_SCAN %s\n", macAddress);
+      Serial.printf("RES GET_SCAN %s\n", buffer_rssi_mac);
     }else{
       Serial.println("ERR Unknown command.");
     }

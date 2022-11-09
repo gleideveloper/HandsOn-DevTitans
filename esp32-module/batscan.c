@@ -14,10 +14,9 @@ static int  usb_probe(struct usb_interface *ifce, const struct usb_device_id *id
 static void usb_disconnect(struct usb_interface *ifce);
 // Envia um comando via USB e espera/retorna a resposta do dispositivo (int)
 static char  *usb_send_cmd(char *cmd, int param);
-// Executado quando o arquivo /sys/kernel/batscan/{led, ldr, threshold} é lido (e.g., cat /sys/kernel/batscan/led)
+// Executado quando o arquivo /sys/kernel/batscan/{scan, ldr, threshold} é lido (e.g., cat /sys/kernel/batscan/scan)
 static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, char *buff);
-// Executado quando o arquivo /sys/kernel/batscan/{led, ldr, threshold} é escrito (e.g., echo "100" | sudo tee -a /sys/kernel/batscan/led)
-static ssize_t attr_store(struct kobject *sys_obj, struct kobj_attribute *attr, const char *buff, size_t count);
+// Executado quando o arquivo /sys/kernel/batscan/{scan, ldr, threshold} é escrito (e.g., echo "100" | sudo tee -a /sys/kernel/batscan/scan)
 
 static char recv_line[MAX_RECV_LINE];              // Armazena dados vindos da USB até receber um caractere de nova linha '\n'
 static struct usb_device *batscan_device;        // Referência para o dispositivo USB
@@ -25,11 +24,9 @@ static uint usb_in, usb_out;                       // Endereços das portas de e
 static char *usb_in_buffer, *usb_out_buffer;       // Buffers de entrada e saída da USB
 static int usb_max_size;                           // Tamanho máximo de uma mensagem USB
 
-// Variáveis para criar os arquivos no /sys/kernel/batscan/{led, ldr, threshold}
-static struct kobj_attribute  led_attribute = __ATTR(led, S_IRUGO | S_IWUSR, attr_show, attr_store);
-//static struct kobj_attribute  ldr_attribute = __ATTR(ldr, S_IRUGO | S_IWUSR, attr_show, attr_store);
-//static struct kobj_attribute  threshold_attribute = __ATTR(threshold, S_IRUGO | S_IWUSR, attr_show, attr_store);
-static struct attribute      *attrs[]       = { &led_attribute.attr, NULL };
+// Variáveis para criar os arquivos no /sys/kernel/batscan/{scan, ldr, threshold}
+static struct kobj_attribute  scan_attribute = __ATTR(scan, S_IRUGO | S_IWUSR, attr_show, NULL);
+static struct attribute      *attrs[]       = { &scan_attribute.attr, NULL };
 static struct attribute_group attr_group    = { .attrs = attrs };
 static struct kobject        *sys_obj;
 
@@ -41,7 +38,7 @@ MODULE_DEVICE_TABLE(usb, id_table);
 
 // Cria e registra o driver do batscan no kernel
 static struct usb_driver batscan_driver = {
-    .name        = batscan",     // Nome do driver
+    .name        = "batscan",     // Nome do driver
     .probe       = usb_probe,       // Executado quando o dispositivo é conectado na USB
     .disconnect  = usb_disconnect,  // Executado quando o dispositivo é desconectado na USB
     .id_table    = id_table,        // Tabela com o VendorID e ProductID do dispositivo
@@ -87,7 +84,7 @@ static char *usb_send_cmd(char *cmd, int param) {
     int retries = 10;                       // Tenta algumas vezes receber uma resposta da USB. Depois desiste.
     char resp_expected[MAX_RECV_LINE];      // Resposta esperada do comando
     char *resp_pos;                         // Posição na linha lida que contém o número retornado pelo dispositivo
-    char *resp_str = (char*)kmalloc(sizeof(char) * MAX_RECV_LINE, GFP_KERNEL);    // Número retornado pelo dispositivo (e.g., valor do led, valor do ldr)
+    char *resp_str = (char*)kmalloc(sizeof(char) * MAX_RECV_LINE, GFP_KERNEL);    // Número retornado pelo dispositivo (e.g., valor do scan, valor do ldr)
 
     printk(KERN_INFO "batscan: Enviando comando: %s\n", cmd);
 
@@ -96,12 +93,17 @@ static char *usb_send_cmd(char *cmd, int param) {
 
     // Envia o comando (usb_out_buffer) para a
     ret = usb_bulk_msg(batscan_device, usb_sndbulkpipe(batscan_device, usb_out), usb_out_buffer, strlen(usb_out_buffer), &actual_size, 1000*HZ);
+    
+    printk(KERN_INFO "batscan[usb_out_buffer]: %d", ret);
+
     if (ret) {
         printk(KERN_ERR "batscan: Erro de codigo %d ao enviar comando!\n", ret);
         return NULL;
     }
 
+    printk(KERN_INFO "batscan[104]:");
     sprintf(resp_expected, "RES %s", cmd);  // Resposta esperada. Ficará lendo linhas até receber essa resposta.
+    printk(KERN_INFO "batscan[resp_expected]: %s ", resp_expected);
 
     // Espera pela resposta correta do dispositivo (desiste depois de várias tentativas)
     while (retries > 0) {
@@ -125,7 +127,8 @@ static char *usb_send_cmd(char *cmd, int param) {
 
                     // Acessa a parte da resposta que contém o número e converte para inteiro
                     resp_pos = &recv_line[strlen(resp_expected) + 1];
-                    strcpy(resp_pos, resp_str);
+                    strcpy(resp_str, resp_pos);
+                    printk(KERN_INFO "batscan[resp_str]: Lendo %s ...\n", resp_str);
                     //kstrtol(resp_pos, 10, &resp_number)
                     return resp_str;
                 }
@@ -143,46 +146,18 @@ static char *usb_send_cmd(char *cmd, int param) {
     return NULL; // Não recebi a resposta esperada do dispositivo
 }
 
-// Executado quando o arquivo /sys/kernel/batscan/{led, ldr, threshold} é lido (e.g., cat /sys/kernel/batscan/led)
+// Executado quando o arquivo /sys/kernel/batscan/{scan, ldr, threshold} é lido (e.g., cat /sys/kernel/batscan/scan)
 static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, char *buff) {
     char *value = NULL;
     const char *attr_name = attr->attr.name;
 
     printk(KERN_INFO "batscan: Lendo %s ...\n", attr_name);
 
-    if (!strcmp(attr_name, "led"))
+    if (!strcmp(attr_name, "scan"))
         value = usb_send_cmd("GET_SCAN", -1);
 
-    sprintf(buff, "%s\n", value);                   // Cria a mensagem com o valor do led, ldr ou threshold
-    return strlen(buff);
-}
+    printk(KERN_INFO "batscan[usb_send_cmd]: Lendo %s ...\n", value);
 
-// Executado quando o arquivo /sys/kernel/batscan/{led, ldr, threshold} é escrito (e.g., echo "100" | sudo tee -a /sys/kernel/batscan/led)
-static ssize_t attr_store(struct kobject *sys_obj, struct kobj_attribute *attr, const char *buff, size_t count) {
-    char *ret = NULL;
-    long value;
-    const char *attr_name = attr->attr.name;
-
-    ret = kstrtol(buff, 10, &value);
-    if (ret) {
-        printk(KERN_ALERT "batscan: valor de %s invalido.\n", attr_name);
-        return -EACCES;
-    }
-
-    printk(KERN_INFO "batscan: Setando %s para %ld ...\n", attr_name, value);
-
-    if (!strcmp(attr_name, "led"))
-        ret = usb_send_cmd("SET_LED", value);
-    else if (!strcmp(attr_name, "threshold"))
-        ret = usb_send_cmd("SET_THRESHOLD", value);
-    else {
-        printk(KERN_ALERT "batscan: o valor do ldr (sensor de luz) eh apenas para leitura.\n");
-        return -EACCES;
-    }
-    if (ret < 0) {
-        printk(KERN_ALERT "batscan: erro ao setar o valor do %s.\n", attr_name);
-        return -EACCES;
-    }
-
+    sprintf(buff, "%s\n", value);                   // Cria a mensagem com o valor do scan, ldr ou threshold
     return strlen(buff);
 }

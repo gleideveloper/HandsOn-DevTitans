@@ -14,9 +14,8 @@ static int  usb_probe(struct usb_interface *ifce, const struct usb_device_id *id
 static void usb_disconnect(struct usb_interface *ifce);
 // Envia um comando via USB e espera/retorna a resposta do dispositivo (int)
 static char  *usb_send_cmd(char *cmd, int param);
-// Executado quando o arquivo /sys/kernel/batscan/{scan, ldr, threshold} é lido (e.g., cat /sys/kernel/batscan/scan)
+// Executado quando o arquivo /sys/kernel/batscan/{scan} é lido (e.g., cat /sys/kernel/batscan/scan)
 static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, char *buff);
-// Executado quando o arquivo /sys/kernel/batscan/{scan, ldr, threshold} é escrito (e.g., echo "100" | sudo tee -a /sys/kernel/batscan/scan)
 
 static char recv_line[MAX_RECV_LINE];              // Armazena dados vindos da USB até receber um caractere de nova linha '\n'
 static struct usb_device *batscan_device;        // Referência para o dispositivo USB
@@ -24,7 +23,7 @@ static uint usb_in, usb_out;                       // Endereços das portas de e
 static char *usb_in_buffer, *usb_out_buffer;       // Buffers de entrada e saída da USB
 static int usb_max_size;                           // Tamanho máximo de uma mensagem USB
 
-// Variáveis para criar os arquivos no /sys/kernel/batscan/{scan, ldr, threshold}
+// Variáveis para criar os arquivos no /sys/kernel/batscan/{scan}
 static struct kobj_attribute  scan_attribute = __ATTR(scan, S_IRUGO | S_IWUSR, attr_show, NULL);
 static struct attribute      *attrs[]       = { &scan_attribute.attr, NULL };
 static struct attribute_group attr_group    = { .attrs = attrs };

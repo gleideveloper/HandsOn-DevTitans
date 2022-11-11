@@ -34,7 +34,9 @@ static void wifi_sniffer_init(void);
 static void wifi_sniffer_set_channel(uint8_t channel);
 static const char *wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type);
 static void wifi_sniffer_packet_handler(void *buff, wifi_promiscuous_pkt_type_t type);
-char buffer_rssi_mac [60];
+char buffer_rssi_mac[22];
+char *resp_rssi_mac[5];
+int size_str = 0;
 
 esp_err_t event_handler(void *ctx, system_event_t *event){
   return ESP_OK;
@@ -82,16 +84,16 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
 
-  //Serial.printf ("%s\n",buffer_rssi_mac);
+ //Serial.printf ("%s\n",buffer_rssi_mac);
+  while(size_str < 6){
+    resp_rssi_mac[size_str++] = buffer_rssi_mac;
+  }
 }
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin 5 as an output.
-  Serial.begin(115200);
-  delay(10);
+  Serial.begin(9600);
   wifi_sniffer_init();
-  pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
 // the loop function runs over and over again forever
@@ -113,8 +115,13 @@ void loop() {
 void processCommand(String command) {
     command.trim();
     command.toUpperCase();
+    size_str = 0;
     if (command == "GET_SCAN"){
-      Serial.printf("RES GET_SCAN %s\n", buffer_rssi_mac);
+        while(size_str < 6){
+          //printf("RSSI_MAC: %s %d\n", resp_rssi_mac[size_str++]);
+          Serial.printf("RES GET_SCAN %s\n", resp_rssi_mac[size_str++]);
+        }
+      //Serial.printf("RES GET_SCAN %s\n", buffer_rssi_mac);      
     }else{
       Serial.println("ERR Unknown command.");
     }

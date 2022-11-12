@@ -88,7 +88,7 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin 5 as an output.
-  Serial.begin(115200);
+  Serial.begin(9600);
   delay(10);
   wifi_sniffer_init();
   pinMode(LED_GPIO_PIN, OUTPUT);

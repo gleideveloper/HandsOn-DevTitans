@@ -67,16 +67,16 @@ class Batscan {
          * "ldr" ou "threshold" do diretório /sys/kernel/batscan.
          */
         char * readFileValue(string file);
-        bool writeFileValue(string file, int value);
+        //bool writeFileValue(string file, int value);
 
         /**
          * Armazena valores simulados para o caso do dispositivo não estar
          * conectado, mas a propriedade devtitans.batscan.allow_simulated
          * for true.
          */
-         int simLedValue = 88;
-         int simThresholdValue = 42;
-         char simScanValue[21] = "-86|00:1B:C9:4B:E3:57"
+         //int simLedValue = 88;
+         //int simThresholdValue = 42;
+         char simScanValue[22] = "-86|00:1B:C9:4B:E3:57";
 };
 
 } // namespace

@@ -9,7 +9,7 @@ void BatscanClient::start(int argc, char **argv) {
 
     if (argc < 2) {
         cout << "Sintaxe: " << argv[0] << "  " << endl;
-        cout << "    Comandos: get-led, set-led, get-luminosity, get-threshold, set-threshold" << endl;
+        cout << "    Comandos: get-scan, set-led, get-luminosity, get-threshold, set-threshold" << endl;
         exit(1);
     }
 

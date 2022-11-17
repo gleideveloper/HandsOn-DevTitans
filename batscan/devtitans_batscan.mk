@@ -27,7 +27,8 @@ PRODUCT_VENDOR_PROPERTIES += \
 ## Seta o diretório de overlays
 #PRODUCT_PACKAGE_OVERLAYS = device/devtitans/kraken/overlay
 #
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
+    batscan_client
 #    UniversalMediaPlayer \
 #    hello_c \
 #    nano \

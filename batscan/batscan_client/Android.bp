@@ -1,0 +1,9 @@
+cc_binary {
+    name:         "batscan_client",
+    srcs:         [ "batscan_client.cpp" ],
+
+    shared_libs:  [ "batscan_lib" ],
+    required:     [ "batscan_lib" ],
+
+    vendor: true,
+}

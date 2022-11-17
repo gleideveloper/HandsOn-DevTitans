@@ -7,7 +7,7 @@ MODULE_DESCRIPTION("Driver de acesso ao batscan (ESP32 com Chip Serial CP2102");
 MODULE_LICENSE("GPL");
 
 // Tamanho máximo de uma linha de resposta do dispositvo USB
-#define MAX_RECV_LINE 100
+#define MAX_RECV_LINE 300
 // Executado quando o dispositivo é conectado na USB
 static int  usb_probe(struct usb_interface *ifce, const struct usb_device_id *id); 
 // Executado quando o dispositivo USB é desconectado da USB
@@ -16,6 +16,7 @@ static void usb_disconnect(struct usb_interface *ifce);
 static char  *usb_send_cmd(char *cmd, int param);
 // Executado quando o arquivo /sys/kernel/batscan/{scan} é lido (e.g., cat /sys/kernel/batscan/scan)
 static ssize_t attr_show(struct kobject *sys_obj, struct kobj_attribute *attr, char *buff);
+static int  resp_cmd(char *cmd);
 
 static char recv_line[MAX_RECV_LINE];              // Armazena dados vindos da USB até receber um caractere de nova linha '\n'
 static struct usb_device *batscan_device;        // Referência para o dispositivo USB
@@ -74,12 +75,20 @@ static void usb_disconnect(struct usb_interface *interface) {
     kfree(usb_out_buffer);
 }
 
+int resp_cmd(char *cmd){
+    int j = 0;
+    while(cmd[j] != 'R'){
+        j++;
+    }
+    return j;
+}
+
 // Envia um comando via USB, espera e retorna a resposta do dispositivo (convertido para int)
 // Exemplo de Comando:  SET_LED 80
 // Exemplo de Resposta: RES SET_LED 1
 static char *usb_send_cmd(char *cmd, int param) {
     int recv_size = 0;                      // Quantidade de caracteres no recv_line
-    int ret, actual_size, i;
+    int ret, actual_size, index;
     int retries = 10;                       // Tenta algumas vezes receber uma resposta da USB. Depois desiste.
     char resp_expected[MAX_RECV_LINE];      // Resposta esperada do comando
     char *resp_pos;                         // Posição na linha lida que contém o número retornado pelo dispositivo
@@ -108,14 +117,15 @@ static char *usb_send_cmd(char *cmd, int param) {
             printk(KERN_ERR "batscan: Erro ao ler dados da USB (tentativa %d). Codigo: %d\n", ret, retries--);
             continue;
         }
-
+        // index = resp_cmd(usb_in_buffer);
+        // printk(KERN_INFO "batscan index: %i", index);
+        
         // Para cada caractere recebido ...
-        for (i=0; i<actual_size; i++) {
-
+        for (int i=0; i<actual_size; i++) {
+            //printk(KERN_INFO "batscan FOR[%i]: %c", i, usb_in_buffer[i]);
             if (usb_in_buffer[i] == '\n') {  // Temos uma linha completa
                 recv_line[recv_size] = '\0';
                 printk(KERN_INFO "batscan: Recebido uma linha: '%s'\n", recv_line);
-
                 // Verifica se o início da linha recebida é igual à resposta esperada do comando enviado
                 if (!strncmp(recv_line, resp_expected, strlen(resp_expected))) {
                     printk(KERN_INFO "batscan: Linha eh resposta para %s! Processando ...\n", cmd);
@@ -126,13 +136,11 @@ static char *usb_send_cmd(char *cmd, int param) {
                     printk(KERN_INFO "batscan[resp_str]: Lendo %s ...\n", resp_str);
                     //kstrtol(resp_pos, 10, &resp_number)
                     return resp_str;
-                }
-                else { // Não é a linha que estávamos esperando. Pega a próxima.
+                }else { // Não é a linha que estávamos esperando. Pega a próxima.
                     printk(KERN_INFO "batscan: Nao eh resposta para %s! Tentiva %d. Proxima linha...\n", cmd, retries--);
                     recv_size = 0; // Limpa a linha lida (recv_line)
                 }
-            }
-            else { // É um caractere normal (sem ser nova linha), coloca no recv_line e lê o próximo caractere
+            }else { // É um caractere normal (sem ser nova linha), coloca no recv_line e lê o próximo caractere
                 recv_line[recv_size] = usb_in_buffer[i];
                 recv_size++;
             }

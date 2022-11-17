@@ -9,9 +9,9 @@
 #define WIFI_CHANNEL_SWITCH_INTERVAL  (500)
 #define WIFI_CHANNEL_MAX               (13)
 
-#define SIZE_C                         22
+#define SIZE_C                         23
 #define SIZE_M                         18
-#define N                              100
+#define N                              50
 #define MACS                           5
 
 uint8_t level = 0, channel = 1;
@@ -89,23 +89,22 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
   const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
 
-  sprintf(buffer_rssi_mac, "%02d|%02x:%02x:%02x:%02x:%02x:%02x",
+  sprintf(buffer_rssi_mac, "%02d %02x:%02x:%02x:%02x:%02x:%02x|",
     /* RSSI */
     ppkt->rx_ctrl.rssi,
     /* ADDR2 */
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
-    if(count_mac < N){
-      strcpy(buffer_aux[count_mac].rssi_mac, buffer_rssi_mac);
-      strncpy(buffer_aux[count_mac].mac, buffer_rssi_mac+4,18);
-      //Serial.printf("%s \n", buffer_aux[count_mac].mac);
-      count_mac++;
-    }
-    
+  if(count_mac < N){
+    strcpy(buffer_aux[count_mac].rssi_mac, buffer_rssi_mac);
+    strncpy(buffer_aux[count_mac].mac, buffer_rssi_mac+4,17);
+    //Serial.printf("%s \n", buffer_aux[count_mac].mac);
+    count_mac++;
+  }
 }
 int contain_mac(char *mac){
   for(int j=0; j < MACS; j++){
-    if(strcmp(buffer_mac[j].mac,mac) == 0) return 0;         
+    if(strcmp(buffer_mac[j].mac,mac) == 0) return 0;            
   }
   return 1;
 }
@@ -134,7 +133,7 @@ void processCommand(String command) {
     command.trim();
     command.toUpperCase();
     count_mac = 0;
-    
+    char rssimaclist[115];
     if (command == "GET_SCAN"){
       //gets only the different macs
       while(count_mac < MACS){
@@ -150,11 +149,12 @@ void processCommand(String command) {
       count_mac = 0; 
       //prints macs
       while(count_mac < MACS){
-        Serial.printf("RES GET_SCAN %s\n", buffer_mac[count_mac].rssi_mac);
-        //Serial.printf("RES GET_SCAN buffer_mac: %s \n", buffer_mac[count_mac].mac);
-        count_mac++;
+        //Serial.printf("RES GET_SCAN %s", buffer_mac[count_mac++].rssi_mac);
+        strncat(rssimaclist,buffer_mac[count_mac++].rssi_mac,SIZE_C) ;
       }
+      Serial.printf("RES GET_SCAN %s\n", rssimaclist);
       memset(buffer_aux, 0, N);
+      //for(int i=0; i < N; i++)Serial.printf("new buffer_aux %s\n",buffer_aux[i]);
     }else{
       Serial.println("ERR Unknown command.");
     }   

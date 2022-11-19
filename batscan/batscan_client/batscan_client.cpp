@@ -17,7 +17,7 @@ void BatscanClient::start(int argc, char **argv) {
 
 // Comando get-scan
     if (!strcmp(argv[1], "get-scan")) {
-        cout << "Valor do RSSI | Mac: " << smartlamp.getScan() << endl;
+        cout << "Valor do RSSI | Mac: " << batscan.getScan() << endl;
     }
 
 
@@ -53,9 +53,9 @@ void BatscanClient::start(int argc, char **argv) {
     else {
         cout << "Comando inválido." << endl;
         exit(1);
-    }
+    }*/
 }
-*/
+
 } // namespace
 
 

@@ -50,7 +50,7 @@ string Batscan::readFileValue(string file) {
     }
 
     // Se chegou aqui, não foi possível conectar ou se comunicar com o dispositivo
-    return -1;
+    return "-1";
 }
 
 /*bool Batscan::writeFileValue(string file, int value) {

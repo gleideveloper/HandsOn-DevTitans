@@ -117,12 +117,10 @@ static char *usb_send_cmd(char *cmd, int param) {
             printk(KERN_ERR "batscan: Erro ao ler dados da USB (tentativa %d). Codigo: %d\n", ret, retries--);
             continue;
         }
-        // index = resp_cmd(usb_in_buffer);
-        // printk(KERN_INFO "batscan index: %i", index);
         
         // Para cada caractere recebido ...
-        for (int i=0; i<actual_size; i++) {
-            //printk(KERN_INFO "batscan FOR[%i]: %c", i, usb_in_buffer[i]);
+        for (int i=index; i<actual_size; i++) {
+            printk(KERN_INFO "batscan: Buffer recebido %c",usb_in_buffer[i]);
             if (usb_in_buffer[i] == '\n') {  // Temos uma linha completa
                 recv_line[recv_size] = '\0';
                 printk(KERN_INFO "batscan: Recebido uma linha: '%s'\n", recv_line);

@@ -133,7 +133,7 @@ void processCommand(String command) {
     command.trim();
     command.toUpperCase();
     count_mac = 0;
-    char rssimaclist[115];
+    //char rssimaclist[115];
     if (command == "GET_SCAN"){
       //gets only the different macs
       while(count_mac < MACS){
@@ -149,10 +149,10 @@ void processCommand(String command) {
       count_mac = 0; 
       //prints macs
       while(count_mac < MACS){
-        //Serial.printf("RES GET_SCAN %s", buffer_mac[count_mac++].rssi_mac);
-        strncat(rssimaclist,buffer_mac[count_mac++].rssi_mac,SIZE_C) ;
+        Serial.printf("RES GET_SCAN %s\n", buffer_mac[count_mac++].rssi_mac);
+        //strncat(rssimaclist,buffer_mac[count_mac++].rssi_mac,SIZE_C) ;
       }
-      Serial.printf("RES GET_SCAN %s\n", rssimaclist);
+      //Serial.printf("RES GET_SCAN %s\n", rssimaclist);
       memset(buffer_aux, 0, N);
       //for(int i=0; i < N; i++)Serial.printf("new buffer_aux %s\n",buffer_aux[i]);
     }else{

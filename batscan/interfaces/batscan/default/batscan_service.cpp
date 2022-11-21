@@ -1,12 +1,18 @@
-#include "smartlamp_service.h"
+#include "batscan_service.h"
 
-namespace aidl::devtitans::smartlamp {
-    ndk::ScopedAStatus SmartlampService::connect(int32_t* _aidl_return) {
-        *_aidl_return = this->smartlamp.connect();
+namespace aidl::devtitans::batscan {
+    ndk::ScopedAStatus BatscanService::connect(int32_t* _aidl_return) {
+        *_aidl_return = this->batscan.connect();
         LOG(INFO) << "connect(): " << *_aidl_return;
         return ndk::ScopedAStatus::ok();
     }
 
+    ndk::ScopedAStatus BatscanService::getScan(char* _aidl_return) {
+        *_aidl_return = this->batscan.getScan();
+        LOG(INFO) << "getScan: " << *_aidl_return;
+        return ndk::ScopedAStatus::ok();
+    }
+/*
     ndk::ScopedAStatus SmartlampService::getLed(int32_t* _aidl_return) {
         *_aidl_return = this->smartlamp.getLed();
         LOG(INFO) << "getLed(): " << *_aidl_return;
@@ -24,4 +30,5 @@ namespace aidl::devtitans::smartlamp {
         LOG(INFO) << "getLuminosity(): " << *_aidl_return;
         return ndk::ScopedAStatus::ok();
     }
+*/
 }

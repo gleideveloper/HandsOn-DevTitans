@@ -1,2 +1,2 @@
-# Define o rótulo do serviço AIDL batscan
+# Define o rótulo do serviço AIDL smartlamp
 devtitans.batscan.IBatscan/default  u:object_r:batscan_service:s0

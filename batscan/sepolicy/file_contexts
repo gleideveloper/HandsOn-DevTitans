@@ -1,2 +1,2 @@
-# Define o rótulo do serviço AIDL batscan
-devtitans.batscan.IBatscan/default  u:object_r:batscan_service:s0
+# Define o rótulo do daemon batscan
+/vendor/bin/hw/devtitans.batscan-service  u:object_r:batscan_daemon_exec:s0

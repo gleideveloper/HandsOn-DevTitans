@@ -90,19 +90,15 @@ static char *usb_send_cmd(char *cmd, int param) {
     if (param >= 0) sprintf(usb_out_buffer, "%s %d\n", cmd, param); // Se param >=0, o comando possui um parâmetro (int)
     else sprintf(usb_out_buffer, "%s\n", cmd);                      // Caso contrário, é só o comando mesmo
 
-    // Envia o comando (usb_out_buffer) para a
+    // Envia o comando (usb_out_buffer) para a USB
     ret = usb_bulk_msg(batscan_device, usb_sndbulkpipe(batscan_device, usb_out), usb_out_buffer, strlen(usb_out_buffer), &actual_size, 1000*HZ);
-    
-    printk(KERN_INFO "batscan[usb_out_buffer]: %d", ret);
 
     if (ret) {
         printk(KERN_ERR "batscan: Erro de codigo %d ao enviar comando!\n", ret);
         return NULL;
     }
 
-    printk(KERN_INFO "batscan[104]:");
     sprintf(resp_expected, "RES %s", cmd);  // Resposta esperada. Ficará lendo linhas até receber essa resposta.
-    printk(KERN_INFO "batscan[resp_expected]: %s ", resp_expected);
 
     // Espera pela resposta correta do dispositivo (desiste depois de várias tentativas)
     while (retries > 0) {

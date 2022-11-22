@@ -6,10 +6,10 @@
 #include "esp_event_loop.h"
 #include "nvs_flash.h"
 
-#define LED_GPIO_PIN                     5
 #define WIFI_CHANNEL_SWITCH_INTERVAL  (500)
 #define WIFI_CHANNEL_MAX               (13)
-
+#define SIZE_CHAR                      18
+#define SIZE_MAC                       7
 uint8_t level = 0, channel = 1;
 
 static wifi_country_t wifi_country = {.cc="CN", .schan = 1, .nchan = 13}; //Most recent esp32 library struct
@@ -34,7 +34,12 @@ static void wifi_sniffer_init(void);
 static void wifi_sniffer_set_channel(uint8_t channel);
 static const char *wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type);
 static void wifi_sniffer_packet_handler(void *buff, wifi_promiscuous_pkt_type_t type);
-char buffer_rssi_mac [60];
+
+char buffer_rssi_mac[22];
+char buffer_mac[SIZE_CHAR];
+char str_aux[SIZE_CHAR];
+char *resp_rssi_mac[SIZE_MAC];
+int size_str = 0;
 
 esp_err_t event_handler(void *ctx, system_event_t *event){
   return ESP_OK;
@@ -81,17 +86,26 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
     /* ADDR2 */
     hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
   );
-
-  //Serial.printf ("%s\n",buffer_rssi_mac);
+  sprintf(buffer_mac, "%02x:%02x:%02x:%02x:%02x:%02x",
+    /* ADDR2 */
+    hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],hdr->addr2[3],hdr->addr2[4],hdr->addr2[5]
+  );
+  //Preencher apenas com MAC
+  
+  //Serial.printf ("\nValue = %s\n", str_aux);
+  //Serial.printf ("Compare = %d\n", strcmp(str_aux,buffer_mac));
+  //while(size_str < SIZE_MAC){  
+    //if(0!=strcmp(str_aux,buffer_mac)){
+      resp_rssi_mac[size_str++] = buffer_rssi_mac;
+    //}
+    //sprintf(str_aux,"%s",buffer_mac);
+  //}
 }
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin 5 as an output.
   Serial.begin(9600);
-  delay(10);
   wifi_sniffer_init();
-  pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
 // the loop function runs over and over again forever
@@ -113,8 +127,14 @@ void loop() {
 void processCommand(String command) {
     command.trim();
     command.toUpperCase();
+    size_str = 0;
     if (command == "GET_SCAN"){
-      Serial.printf("RES GET_SCAN %s\n", buffer_rssi_mac);
+        while(size_str < SIZE_MAC){
+          //printf("RSSI_MAC: %s %d\n", resp_rssi_mac[size_str++]);
+          //Serial.printf("RES GET_SCAN %s\n", str_buffer[size_str++].addr);
+          Serial.printf("RES GET_SCAN %s\n", resp_rssi_mac[size_str++]);
+        }
+      //Serial.printf("RES GET_SCAN %s\n", buffer_rssi_mac);      
     }else{
       Serial.println("ERR Unknown command.");
     }

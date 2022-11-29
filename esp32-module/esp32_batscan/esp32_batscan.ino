@@ -94,7 +94,7 @@ void setup() {
   pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
-// the loop function runs over and over again forever
+// the loop function runs over and over again
 void loop() {
   String serialCommand;
 

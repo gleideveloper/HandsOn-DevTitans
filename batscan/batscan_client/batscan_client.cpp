@@ -5,7 +5,7 @@ using namespace std;                  // Permite usar o cout e endl diretamente 
 namespace devtitans::batscan {      // Entra no pacote devtitans::hello
 
 void BatscanClient::start(int argc, char **argv) {
-    cout << "Cliente SmartLamp!" << endl;
+    cout << "Cliente Batscan!" << endl;
 
     if (argc < 2) {
         cout << "Sintaxe: " << argv[0] << "  " << endl;

@@ -21,106 +21,71 @@
         android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_width="391dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="132dp"
+        android:background="#f9eeff"
         android:paddingBottom="25dp"
-        android:background="#f9eeff">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
         <TextView
             android:id="@+id/labelStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="28dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="48dp"
             android:text="Status:"
             android:textColor="#4e2358"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/labelStatus"
-            app:layout_constraintLeft_toLeftOf="@id/labelStatus"
             android:layout_marginLeft="70dp"
             android:text="Iniciando ..."
             android:textColor="#c47e00"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/labelStatus"
+            app:layout_constraintLeft_toLeftOf="@id/labelStatus" />
 
 
         <TextView
             android:id="@+id/labelMacadress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/labelStatus"
-            app:layout_constraintLeft_toLeftOf="@id/labelStatus"
             android:layout_marginTop="40dp"
             android:text="End. Mac:"
             android:textColor="#4e2358"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/labelStatus"
+            app:layout_constraintTop_toTopOf="@id/labelStatus" />
 
         <TextView
-            android:id="@+id/textLuminosity"
+            android:id="@+id/textMacadress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/labelLuminosity"
-            app:layout_constraintLeft_toLeftOf="@id/labelLuminosity"
-            android:layout_marginLeft="70dp"
-            android:textColor="#c47e00"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/labelLed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/labelLuminosity"
-            app:layout_constraintLeft_toLeftOf="@id/labelLuminosity"
-            android:layout_marginTop="40dp"
-            android:text="Led:"
-            android:textColor="#4e2358"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editLed"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/labelLed"
-            app:layout_constraintLeft_toLeftOf="@id/labelLed"
-            android:layout_marginLeft="70dp"
-            android:layout_marginBottom="-12dp"
+            android:layout_marginLeft="96dp"
+            android:text="Teste Mac:"
             android:textColor="#c47e00"
             android:textSize="16sp"
-            android:inputType="number" />
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="45dp"
-            app:layout_constraintBottom_toBottomOf="@id/editLed"
-            app:layout_constraintLeft_toRightOf="@id/editLed"
-            app:layout_constraintTop_toTopOf="@id/editLed"
-            android:layout_marginLeft="20dp"
-            android:text="Set"
-            android:onClick="updateLed" />
-
-        <Button
-            android:layout_width="170dp"
-            android:layout_height="45dp"
-            app:layout_constraintTop_toTopOf="@id/labelLed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="70dp"
-            android:text="Atualizar"
-            android:onClick="updateAll" />
+            app:layout_constraintBottom_toBottomOf="@id/labelMacadress"
+            app:layout_constraintLeft_toLeftOf="@id/labelMacadress" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>dx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:onClick="updateAll"
+        android:text="Scanear"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="287dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

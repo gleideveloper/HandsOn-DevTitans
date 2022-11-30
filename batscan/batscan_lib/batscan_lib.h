@@ -32,7 +32,7 @@ class Batscan {
          *      1 a 99: led ligado com intensidade ledValue
          *      100: led ligado com intensidade máxima
          */
-        char * getScan(); //K:alterado de getLed()
+        string getScan(); //K:alterado de getLed()
         //bool setLed(int ledValue);
 
         
@@ -66,7 +66,7 @@ class Batscan {
          * Métodos para ler e escrever valores nos arquivos "scan", K> alterado de "led"
          * "ldr" ou "threshold" do diretório /sys/kernel/batscan.
          */
-        char * readFileValue(string file);
+        string readFileValue(string file);
         //bool writeFileValue(string file, int value);
 
         /**

@@ -91,7 +91,6 @@ void setup() {
   Serial.begin(9600);
   delay(10);
   wifi_sniffer_init();
-  pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
 // the loop function runs over and over again forever

@@ -67,7 +67,6 @@ const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type){
   }
 }
 
-//teste git
 void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type){
   if (type != WIFI_PKT_MGMT)
     return;
@@ -92,7 +91,6 @@ void setup() {
   Serial.begin(9600);
   delay(10);
   wifi_sniffer_init();
-  pinMode(LED_GPIO_PIN, OUTPUT);
 }
 
 // the loop function runs over and over again forever

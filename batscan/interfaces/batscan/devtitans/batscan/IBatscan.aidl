@@ -4,7 +4,7 @@ package devtitans.batscan;
 interface IBatscan {
         int connect();
 
-        char* getScan();
+        String getScan();
         //boolean setLed(in int ledValue);
 
         //int getLuminosity();

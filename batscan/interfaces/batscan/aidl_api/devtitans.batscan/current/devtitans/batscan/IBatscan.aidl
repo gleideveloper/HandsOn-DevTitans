@@ -20,5 +20,5 @@ package devtitans.batscan;
 @VintfStability
 interface IBatscan {
   int connect();
-  char getScan();
+  int getLed();
 }

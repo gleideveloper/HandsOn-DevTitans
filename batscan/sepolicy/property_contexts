@@ -1,0 +1,2 @@
+# Define o rótulo da propriedade de sistema
+vendor.devtitans.batscan.allow_simulated  u:object_r:vendor_batscan_prop:s0

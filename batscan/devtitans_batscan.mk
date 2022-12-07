@@ -50,8 +50,8 @@ PRODUCT_PACKAGES += devtitans.batscan-service
 # Device Framework Matrix (Declara que o nosso produto Batscan precisa do serviço batscan)
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/devtitans/HandsOn-DevTitans/batscan/device_framework_matrix.xml
 #
-## Cliente de Linha de Comando para o Serviço Batscan
-#PRODUCT_PACKAGES += batscan_service_client
+## App Cliente de Linha de Comando para o Serviço Batscan
+PRODUCT_PACKAGES += batscan_service_client
 #
 ## App Privilegiado de Teste do Serviço Batscan
 #PRODUCT_PACKAGES += BatscanTestApp

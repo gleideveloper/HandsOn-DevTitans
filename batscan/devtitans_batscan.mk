@@ -54,7 +54,7 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/devtitans/HandsOn-DevTitans
 PRODUCT_PACKAGES += batscan_service_client
 #
 ## App Privilegiado de Teste do Serviço Batscan
-#PRODUCT_PACKAGES += BatscanTestApp
+PRODUCT_PACKAGES += BatscanTestApp
 #
 ## Manager
-#PRODUCT_PACKAGES += devtitans.batscanmanager
+PRODUCT_PACKAGES += devtitans.batscanmanager

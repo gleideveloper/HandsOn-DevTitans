@@ -1,10 +1,10 @@
 android_app {
-    name: "SmartlampTestApp",
+    name: "BatscanTestApp",
 
     srcs:          [ "app/src/**/*.java" ],
     resource_dirs: [ "app/src/main/res" ],
     static_libs:   [
-        "devtitans.smartlamp-V1-java",                   // Biblioteca do Smartlamp AIDL
+        "devtitans.batscan-V1-java",                   // Biblioteca do Batscan AIDL
         "com.google.android.material_material",
         "androidx-constraintlayout_constraintlayout",
         "androidx.test.ext.junit",

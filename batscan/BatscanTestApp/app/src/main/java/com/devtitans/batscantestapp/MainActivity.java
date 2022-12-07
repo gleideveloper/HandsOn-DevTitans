@@ -15,10 +15,9 @@ import devtitans.batscan.IBatscan;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "DevTITANS.SmartlampApp";
+    private static final String TAG = "DevTITANS.Batscan";
 
-    private TextView textStatus, textLuminosity;
-    private EditText editLed;
+    private TextView textStatus, textRssiMac;
     private IBinder binder;
     private IBatscan service;
 
@@ -28,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textStatus =     findViewById(R.id.textStatus);                      // Acessa os componentes da tela
-        textLuminosity = findViewById(R.id.textLuminosity);
-        editLed =        findViewById(R.id.editLed);
+        textRssiMac = findViewById(R.id.textRssiMac);
 
-        binder = ServiceManager.getService("devtitans.smartlamp.ISmartlamp/default"); // Acessa e consulta o binder
+        binder = ServiceManager.getService("devtitans.batscan.IBatscan/default"); // Acessa e consulta o binder
         if (binder != null) {
-            service = ISmartlamp.Stub.asInterface(binder);                   // Acessa o serviço Smartlamp
+            service = IBatscan.Stub.asInterface(binder);                   // Acessa o serviço batscan
             if (service != null)
-                Toast.makeText(this, "Serviço Smartlamp acessado com sucesso.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Serviço batscan acessado com sucesso.", Toast.LENGTH_LONG).show();
             else
-                Toast.makeText(this, "Erro ao acessar o serviço Smartlamp!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Erro ao acessar o serviço batscan!", Toast.LENGTH_LONG).show();
         }
         else
             Toast.makeText(this, "Erro ao acessar o Binder!", Toast.LENGTH_LONG).show();
@@ -61,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
             textStatus.setTextColor(Color.parseColor("#c47e00"));
 
             try {
-                int luminosity = service.getLuminosity();                    // Executa o método getLuminosity via IPC
-                textLuminosity.setText(String.valueOf(luminosity));
-
-                int led = service.getLed();                                  // Executa o método getLed via IPC
-                editLed.setText(String.valueOf(led));
+                textRssiMac.setText(service.getScan());                    // Executa o método getScan via IPC
 
                 int status = service.connect();                              // Executa o método connect via IPC
                 if (status == 0) {
@@ -90,13 +84,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Executado ao clicar no botão "SET" do Led.
-    public void updateLed(View view) {
-        try {
-            int newLed = Integer.parseInt(editLed.getText().toString());     // Executa o método getLed via IPC
-            service.setLed(newLed);
-        } catch (android.os.RemoteException e) {
-            Toast.makeText(this, "Erro ao setar led!", Toast.LENGTH_LONG).show();
-        }
-    }
 }

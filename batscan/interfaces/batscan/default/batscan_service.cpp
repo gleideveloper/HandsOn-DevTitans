@@ -7,9 +7,9 @@ namespace aidl::devtitans::batscan {
         return ndk::ScopedAStatus::ok();
     }
 
-    ndk::ScopedAStatus BatscanService::getLed(int32_t* _aidl_return) {
-        *_aidl_return = this->batscan.getLed();
-        LOG(INFO) << "getLed(): " << *_aidl_return;
+    ndk::ScopedAStatus BatscanService::getScan(string* _aidl_return) {
+        *_aidl_return = this->batscan.getScan();
+        LOG(INFO) << "getScan(): " << *_aidl_return;
         return ndk::ScopedAStatus::ok();
     }
 

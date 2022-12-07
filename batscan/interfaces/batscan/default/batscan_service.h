@@ -15,7 +15,7 @@ namespace aidl::devtitans::batscan {
 class BatscanService : public BnBatscan {
     public:
         ndk::ScopedAStatus connect(int32_t* _aidl_return) override;
-        ndk::ScopedAStatus getLed(int32_t* _aidl_return) override;
+        ndk::ScopedAStatus getScan(string* _aidl_return) override;
 
     private:
         Batscan batscan;                                 // Biblioteca

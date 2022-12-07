@@ -4,6 +4,6 @@ package devtitans.batscan;
 interface IBatscan {    
         int connect();
 
-        int getLed();
+        String getScan();
 
 }

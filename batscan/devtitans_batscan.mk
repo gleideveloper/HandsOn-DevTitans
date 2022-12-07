@@ -37,24 +37,24 @@ PRODUCT_PACKAGES += \
 #    hello_daemon_cpp \
 #    WebServiceVolley \
 #    HelloJava \
-#    smartlamp_client
+#    batscan_client
 #
-#BOARD_SEPOLICY_DIRS += device/devtitans/kraken/sepolicy
+BOARD_SEPOLICY_DIRS += device/devtitans/HandsOn-DevTitans/batscan/sepolicy
 #
-## Smartlamp AIDL Interface
-#PRODUCT_PACKAGES += devtitans.smartlamp
+# Batscan AIDL Interface
+PRODUCT_PACKAGES += devtitans.batscan
+
+# Batscan Binder Service
+PRODUCT_PACKAGES += devtitans.batscan-service
+
+# Device Framework Matrix (Declara que o nosso produto Batscan precisa do serviço batscan)
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/devtitans/HandsOn-DevTitans/batscan/device_framework_matrix.xml
 #
-## Smartlamp Binder Service
-#PRODUCT_PACKAGES += devtitans.smartlamp-service
+## App Cliente de Linha de Comando para o Serviço Batscan
+PRODUCT_PACKAGES += batscan_service_client
 #
-## Device Framework Matrix (Declara que o nosso produto Kraken precisa do serviço smartlamp)
-#DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/devtitans/kraken/device_framework_matrix.xml
-#
-## Cliente de Linha de Comando para o Serviço Smartlamp
-#PRODUCT_PACKAGES += smartlamp_service_client
-#
-## App Privilegiado de Teste do Serviço Smartlamp
-#PRODUCT_PACKAGES += SmartlampTestApp
+## App Privilegiado de Teste do Serviço Batscan
+#PRODUCT_PACKAGES += BatscanTestApp
 #
 ## Manager
-#PRODUCT_PACKAGES += devtitans.smartlampmanager
+#PRODUCT_PACKAGES += devtitans.batscanmanager

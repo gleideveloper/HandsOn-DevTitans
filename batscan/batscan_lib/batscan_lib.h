@@ -32,34 +32,8 @@ class Batscan {
          *      1 a 99: led ligado com intensidade ledValue
          *      100: led ligado com intensidade máxima
          */
-        string getScan(); //K:alterado de getLed()
-        //bool setLed(int ledValue);
-
+        string getScan(); //K:alterado de getScan()
         
-        /**
-         * Acessa o nível de luminosidade atual conforme reportado
-         * pelo sensor de luz -- LDR (light-dependent resistor).
-         *
-         * Retorna:
-         *      0: completamente escuro
-         *      1 a 99: nível de luminosidade
-         *      100: completamente claro
-         */
-        //int getLuminosity();
-
-        /**
-         * Threshold - Limiar de luminosidade para ligar/desligar o led.
-         * Ao executar esse método, o dispositivo SmartLamp entra no modo
-         * automático, em que o led será ligado se a luminosidade for
-         * menor que o limiar. Caso contrário, o led é desligado.
-         *
-         * Valor retornado/setado:
-         *      0: completamente escuro
-         *      1 a 99: nível de luminosidade
-         *      100: completamente claro
-         */
-        //int getThreshold();
-        //bool setThreshold(int thresholdValue);
 
     private:
         /**

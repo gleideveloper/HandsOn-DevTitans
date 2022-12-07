@@ -1,11 +1,9 @@
 package devtitans.batscan;
 
 @VintfStability
-interface IBatscan {
+interface IBatscan {    
         int connect();
 
-        char* getScan();
-        //boolean setLed(in int ledValue);
+        String getScan();
 
-        //int getLuminosity();
 }

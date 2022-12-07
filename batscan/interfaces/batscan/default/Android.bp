@@ -1,0 +1,21 @@
+cc_binary {
+    name:                  "devtitans.batscan-service",
+    relative_install_path: "hw",                           // HALs ficam armazenados dentro do subdiretório hw do bin
+    init_rc:               ["batscan-default.rc"],       // Usado pelo init para iniciar o serviço
+    vintf_fragments:       ["batscan-default.xml"],      // Este módulo "provê" o serviço Batscan
+    vendor:                true,
+
+    shared_libs: [
+        "libbase",                                         // Contém o logging e centenas de métodos convenientes (usamos só o logging) 
+        "libbinder_ndk",                                   // Biblioteca do binder usada na criação de HALs
+        "batscan_lib",                                   // Biblioteca do batscan criada anteriormente
+        "devtitans.batscan-V1-ndk_platform",             // Biblioteca criada automaticamente pelo AIDL do batscan
+    ],
+
+    srcs: [
+        "batscan_service.cpp",
+        "main.cpp"
+    ],
+
+    required: [ "batscan_lib" ]
+}

@@ -1,0 +1,5 @@
+service devtitans.batscan-service /vendor/bin/hw/devtitans.batscan-service
+        interface aidl devtitans.batscan.IBatscan/default
+        class hal
+        user root
+        group root

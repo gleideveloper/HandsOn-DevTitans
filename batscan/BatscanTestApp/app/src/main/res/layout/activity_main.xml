@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="28dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:text="Status:"
             android:textColor="#4e2358"
             android:textSize="16sp"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/labelStatus"
             app:layout_constraintLeft_toLeftOf="@id/labelStatus"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="100dp"
             android:text="Iniciando ..."
             android:textColor="#c47e00"
             android:textSize="16sp" />
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/labelRssiMac"
             app:layout_constraintLeft_toLeftOf="@id/labelRssiMac"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="100dp"
             android:textColor="#c47e00"
             android:textSize="16sp" />
 

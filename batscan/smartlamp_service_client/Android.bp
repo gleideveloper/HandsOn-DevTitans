@@ -1,0 +1,9 @@
+cc_binary {
+    name: "batscan_service_client",
+    srcs: ["batscan_service_client.cpp"],
+    vendor: true,
+    shared_libs: [
+        "libbinder_ndk",
+        "devtitans.batscan-V1-ndk_platform",
+    ]
+}

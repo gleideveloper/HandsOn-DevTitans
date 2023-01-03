@@ -1,15 +1,15 @@
 package com.example.batscanapp
 
-import com.example.batscanapp.models.Live
+import com.example.batscanapp.models.Equipment
 
 class DataSource {
 
     companion object {
 
-        fun createDataSet(): ArrayList<Live>{
-            val list = ArrayList<Live>()
+        fun createDataSet(): ArrayList<Equipment>{
+            val list = ArrayList<Equipment>()
             list.add(
-                Live(
+                Equipment(
                     "LIVE #001 - Como ter um perfil de desenvolvedor campeão no Linkedin",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/7jvIJPgpcPs/maxresdefault.jpg",
@@ -17,7 +17,7 @@ class DataSource {
                 )
             )
             list.add(
-                Live(
+                Equipment(
                     "LIVE #002 - A arte de escrever programas legíveis! + 20 dicas práticas! (PARTE 1)",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/gaLOFIwDFLI/maxresdefault.jpg",
@@ -25,7 +25,7 @@ class DataSource {
                 )
             )
             list.add(
-                Live(
+                Equipment(
                     "LIVE #003 - A arte de escrever programas legíveis! + 20 dicas práticas! - (PARTE 2)",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/VBfs42u4QKA/maxresdefault.jpg",
@@ -33,7 +33,7 @@ class DataSource {
                 )
             )
             list.add(
-                Live(
+                Equipment(
                     "LIVE #004 - Desenvolvedor Android Júnior: o que você precisa saber!",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/gLNzLRqHF8c/maxresdefault.jpg",
@@ -41,7 +41,7 @@ class DataSource {
                 )
             )
             list.add(
-                Live(
+                Equipment(
                     "LIVE #005 - Criando e publicando seu primeiro app Android!",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/PRmkgeX5pOs/maxresdefault.jpg",
@@ -49,7 +49,7 @@ class DataSource {
                 )
             )
             list.add(
-                Live(
+                Equipment(
                     "LIVE #006 - Dominando o RecyclerView com Kotlin no Android!",
                     "Kaique Ocanha",
                     "https://i3.ytimg.com/vi/EB32R-u_tac/maxresdefault.jpg",

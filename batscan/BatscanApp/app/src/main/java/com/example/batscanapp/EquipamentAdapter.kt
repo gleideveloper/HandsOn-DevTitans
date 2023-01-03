@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.batscanapp.models.Live
-import kotlinx.android.synthetic.main.res_item_live.view.*
+import com.example.batscanapp.models.Equipment
+import kotlinx.android.synthetic.main.res_item_equipament.view.*
 
 
-class LiveAdapter(
-    private val onItemClicked: (Live) -> Unit
+class EquipamentAdapter(
+    private val onItemClicked: (Equipment) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<Live> = ArrayList()
+    private var items: List<Equipment> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return LiveViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.res_item_live, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.res_item_equipament, parent, false)
         )
     }
 
@@ -36,7 +36,7 @@ class LiveAdapter(
         return items.size
     }
 
-    fun setList(liveList: List<Live>) {
+    fun setList(liveList: List<Equipment>) {
         this.items = liveList
     }
 
@@ -48,7 +48,7 @@ class LiveAdapter(
         private val liveAuthor = itemView.author
         private val liveThumbnail = itemView.thumbnail
 
-        fun bind(live: Live, onItemClicked: (Live) -> Unit) {
+        fun bind(live: Equipment, onItemClicked: (Equipment) -> Unit) {
 
             liveTitle.text = live.title
             liveAuthor.text = live.author

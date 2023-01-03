@@ -1,15 +1,16 @@
 package com.devtitans.batscantestapp;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import android.os.ServiceManager;
-import android.os.IBinder;
-import android.os.RemoteException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import devtitans.batscan.IBatscan;
 

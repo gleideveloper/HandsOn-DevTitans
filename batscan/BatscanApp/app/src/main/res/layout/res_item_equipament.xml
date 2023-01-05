@@ -45,19 +45,21 @@
                 app:layout_constraintTop_toBottomOf="@id/thumbnail">
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/vendor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Título da Live"
+                    android:text="@string/vendor"
                     android:textColor="#000"
                     android:textSize="19sp" />
 
                 <TextView
-                    android:id="@+id/author"
+                    android:id="@+id/rssi_mac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Autor da Live"
+                    android:text="@string/rssi_mac"
+                    app:layout_constraintBottom_toBottomOf="@id/vendor"
+                    app:layout_constraintLeft_toLeftOf="@id/vendor"
                     android:textSize="15sp" />
 
             </LinearLayout>

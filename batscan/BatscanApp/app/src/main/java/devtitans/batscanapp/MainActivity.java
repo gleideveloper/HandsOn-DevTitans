@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import android.os.RemoteException;
-
 import devtitans.batscanmanager.BatscanManager;                          // Biblioteca do Manager
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.xactivity_main);
 
         textStatus =     findViewById(R.id.textStatus);                      // Acessa os componentes da tela
         textRssiMac = findViewById(R.id.textRssiMac);
@@ -61,13 +59,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Executado ao clicar no botão "SET" do Led.
-//    public void updateLed(View view) {
-//        try {
-//            int newLed = Integer.parseInt(editLed.getText().toString());     // Executa o método getLed via manager
-//            manager.setLed(newLed);
-//        } catch (android.os.RemoteException e) {
-//            Toast.makeText(this, "Erro ao setar led!", Toast.LENGTH_LONG).show();
-//        }
-//    }
+
 }

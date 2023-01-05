@@ -44,23 +44,22 @@ class EquipamentAdapter(
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
 
-        private val liveTitle = itemView.title
-        private val liveAuthor = itemView.author
-        private val liveThumbnail = itemView.thumbnail
+        private val vendor = itemView.vendor
+        private val rssi_mac = itemView.rssi_mac
 
         fun bind(live: Equipment, onItemClicked: (Equipment) -> Unit) {
 
-            liveTitle.text = live.title
-            liveAuthor.text = live.author
+            vendor.text = live.vendor
+            rssi_mac.text = live.rssi_mac
 
-            val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-
-            Glide.with(itemView.context)
-                .applyDefaultRequestOptions(requestOptions)
-                .load(live.thumbnailUrl)
-                .into(liveThumbnail)
+//            val requestOptions = RequestOptions()
+//                .placeholder(R.drawable.ic_launcher_background)
+//                .error(R.drawable.ic_launcher_background)
+//
+//            Glide.with(itemView.context)
+//                .applyDefaultRequestOptions(requestOptions)
+//                .load(live.thumbnailUrl)
+//                .into(liveThumbnail)
 
             itemView.setOnClickListener {
                 onItemClicked(live)

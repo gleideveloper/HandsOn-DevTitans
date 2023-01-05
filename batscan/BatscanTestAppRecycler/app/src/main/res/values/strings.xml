@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BatscanApp</string>
+    <string name="vendor">Vendor</string>
+    <string name="rssi_mac">RSSI_MAC</string>
 </resources>

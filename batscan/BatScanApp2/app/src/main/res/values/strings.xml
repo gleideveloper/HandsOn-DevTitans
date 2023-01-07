@@ -3,4 +3,6 @@
     <string name="atualizar">atualizar</string>
     <string name="clique_em_atualizar">clique em atualizar para ver a lista de Dispositivos Wi-Fi</string>
     <string name="buscar">buscar</string>
+    <string name="macadress">MacAdress</string>
+    <string name="rssi">rssi</string>
 </resources>

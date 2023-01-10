@@ -61,7 +61,7 @@ public class ListActivity extends AppCompatActivity {
         public EquipamentosViewHolder(ConstraintLayout v, Context context) {
             super(v);
             this.context = context;
-            name = v.findViewById(R.id.itemName);
+            name = v.findViewById(R.id.itemMac);
             v.setOnClickListener(this);
         }
 

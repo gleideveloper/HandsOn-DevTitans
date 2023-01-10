@@ -37,5 +37,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     //noinspection GradlePath
-    implementation files('/home/devtitans-2/aosp/out/soong/.intermediates/device/devtitans/HandsOn-DevTitans/batscan/interfaces/batscan/devtitans.batscan-V1-java/android_common/javac/devtitans.batscan-V1-java.jar')
+    //implementation files('/home/devtitans-2/aosp/out/soong/.intermediates/device/devtitans/HandsOn-DevTitans/batscan/interfaces/batscan/devtitans.batscan-V1-java/android_common/javac/devtitans.batscan-V1-java.jar')
+    implementation files('/home/iartes15/devtitans/HandsOn-DevTitans/batscan/interfaces/batscan/devtitans.batscan-V1-java/android_common/javac/devtitans.batscan-V1-java.jar')
 }

@@ -10,7 +10,7 @@
         android:id="@+id/buttonAlimentar"
         android:layout_width="156dp"
         android:layout_height="65dp"
-        android:onClick="updateAll"
+        android:onClick="listarEquipamentos"
         android:text="@string/atualizar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

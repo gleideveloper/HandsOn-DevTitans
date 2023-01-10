@@ -2,11 +2,15 @@ package devtitans.batscanapp;
 
 import static android.content.ContentValues.TAG;
 
+import static devtitans.batscanapp.Conexao.getDadosVendor;
+
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 //public class EquipamentoDAO {
@@ -86,7 +90,7 @@ import java.util.ArrayList;
 public class EquipamentoDAO {
     private Context context;
     private IBinder binder;
-    private String textStatus, textRssiMac;
+    private String textStatus, textRssiMac, textVendor;
 
 
     private static ArrayList<Equipamento> equipamentoList = new ArrayList<>();
@@ -100,7 +104,8 @@ public class EquipamentoDAO {
         if (equipamentoList.size() == 0) {
             for (int i = 0; equipamentoList.size() < 2; i++) {
                 textRssiMac = findEquipamento();
-                equipamentoList.add(new Equipamento(i, textRssiMac.substring(0,3), textRssiMac.substring(4,20), https://api.macvendors.com/FC-A1-3E-2A-1C-33));
+                textVendor = Conexao.getDadosVendor("https://api.macvendors.com/"+textRssiMac.substring(4,20));
+                equipamentoList.add(new Equipamento(i, textRssiMac.substring(0,3), textRssiMac.substring(4,20), textVendor, false));
             }
 
         }
@@ -112,4 +117,11 @@ public class EquipamentoDAO {
         textRssiMac = "-86|00:1B:44:11:3A:B7";
         return textRssiMac;
     }
+
+
+//    @Override
+//    protected String doInBackground(String... strings) {
+//        return Conexao.getDadosVendor(strings[0]);
+//    }
+
 }

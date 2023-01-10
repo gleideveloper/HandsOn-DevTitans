@@ -5,12 +5,14 @@ public class Equipamento {
     private String mac;
     private String rssi;
     private String vendor;
+    private boolean camera;
 
-    public Equipamento(int id, String mac, String rssi, String vendor) {
+    public Equipamento(int id, String mac, String rssi, String vendor, boolean camera) {
         this.id = id;
         this.mac = mac;
         this.rssi = rssi;
         this.vendor = vendor;
+        this.camera = camera;
     }
 
     public int getId() {

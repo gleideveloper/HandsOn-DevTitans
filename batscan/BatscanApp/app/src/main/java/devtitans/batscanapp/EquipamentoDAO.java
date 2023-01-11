@@ -33,7 +33,7 @@ public class EquipamentoDAO {
                 textRssiMac = findEquipamento();
                 textMac = textRssiMac.substring(4,21);
                 textRssi = textRssiMac.substring(0,3);
-                textVendor = "Intelbras (sim)";
+                textVendor = "Simulado";
                 //String textVendor = Conexao.getDadosVendor("https://api.macvendors.com/" + textRssiMac.substring(4, 20));
                 equipamentoList.add(new Equipamento(i, textMac, textRssi, textVendor, false));
                 Log.i("app ","rssi = "+textRssi);
@@ -44,7 +44,6 @@ public class EquipamentoDAO {
         }
         return equipamentoList;
     }
-
 
     public Equipamento get(int id) {
         return equipamentoList.get(id);

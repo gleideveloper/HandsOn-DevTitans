@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -21,7 +22,7 @@ public class ListActivity extends AppCompatActivity {
 
     public class EquipamentosAdapter extends RecyclerView.Adapter<EquipamentosViewHolder> {
         private Context context;
-        private ArrayList<Equipamento> equipamentos;
+        private List<Equipamento> equipamentos;
         EquipamentoDAO equipamentoDAO;
 
         public EquipamentosAdapter(Context context) {
@@ -31,7 +32,7 @@ public class ListActivity extends AppCompatActivity {
         }
 
         public void update() {
-            equipamentos = equipamentoDAO.getEquipamentoList();
+            equipamentos = equipamentoDAO.getRemoveMacDuplicated();
         }
 
         public EquipamentosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,6 +54,7 @@ public class ListActivity extends AppCompatActivity {
         public int getItemCount() {
             return equipamentos.size();
         }
+
     }
 
     class EquipamentosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -94,6 +96,4 @@ public class ListActivity extends AppCompatActivity {
         adapter.update();
         adapter.notifyDataSetChanged();
     }
-
-
 }

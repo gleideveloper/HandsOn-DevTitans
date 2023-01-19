@@ -2,15 +2,15 @@ package devtitans.batscanapp;
 
 public class Equipamento {
     private int id;
-    private String mac;
     private String rssi;
+    private String mac;
     private String vendor;
     private boolean camera;
 
-    public Equipamento(int id, String mac, String rssi, String vendor, boolean camera) {
+    public Equipamento(int id, String rssi, String mac, String vendor, boolean camera) {
         this.id = id;
-        this.mac = mac;
         this.rssi = rssi;
+        this.mac = mac;
         this.vendor = vendor;
         this.camera = camera;
     }

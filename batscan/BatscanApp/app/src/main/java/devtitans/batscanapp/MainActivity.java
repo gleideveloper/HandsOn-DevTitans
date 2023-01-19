@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     public void listarEquipamentos(View view) {
         Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
-
     }
 
 

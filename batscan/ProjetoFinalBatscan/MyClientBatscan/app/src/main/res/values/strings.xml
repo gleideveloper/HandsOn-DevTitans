@@ -1,13 +1,8 @@
 <resources>
-    <string name="app_name">MyClientUsingRetrofit</string>
-    <string name="parking_spot_number">Informe a vaga de estacionamento</string>
-    <string name="parking_spot_form">Parking Spot Form</string>
-    <string name="license_plate_car">Informe a sua CNH</string>
-    <string name="brand_car">Informe o marca</string>
-    <string name="model_car">Informe o modelo</string>
-    <string name="color_car">Informe  a cor</string>
-    <string name="responsible_name">Informe o nome do responsável</string>
-    <string name="apartment">Informe o apartamento</string>
-    <string name="block">Informe o block</string>
-    <string name="save_parking">save parking</string>
+    <string name="app_name">MyClientBatscan</string>
+    <string name="company_form">Formuláro de cadastro de Mac Address</string>
+    <string name="mac_address">Informe o Mac Address</string>
+    <string name="company_name">Informe nome do fabricante</string>
+    <string name="country_code">Informe o país do fabricante</string>
+    <string name="save_mac_address">Salvar Mac Address</string>
 </resources>

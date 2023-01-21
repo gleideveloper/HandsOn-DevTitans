@@ -91,8 +91,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onResume() {
+        super.onResume();
         adapter.update();
         adapter.notifyDataSetChanged();
     }

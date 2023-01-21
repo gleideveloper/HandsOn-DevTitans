@@ -1,4 +1,4 @@
-package com.gleidev.myclientusingretrofit;
+package com.gleidev.myclientbatscan;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.gleidev.myclientusingretrofit", appContext.getPackageName());
+        assertEquals("com.gleidev.myclientbatscan", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.gleidev.myclientusingretrofit;
+package com.gleidev.myclientbatscan;
 
 import org.junit.Test;
 

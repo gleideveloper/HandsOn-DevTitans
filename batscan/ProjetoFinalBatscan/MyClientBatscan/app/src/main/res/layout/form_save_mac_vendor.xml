@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/parkingSpotLayout"
+                android:id="@+id/macCompanyLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -36,80 +36,42 @@
                     android:id="@+id/titleForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/parking_spot_form"
+                    android:text="@string/company_form"
                     android:textColor="#000"
                     android:textSize="19sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/parkingSpotNumber"
+                    android:id="@+id/macAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/parking_spot_number"
+                    android:hint="@string/mac_address"
                     android:textSize="15sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/licensePlateCar"
+                    android:id="@+id/companyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/license_plate_car"
+                    android:hint="@string/company_name"
                     android:textSize="15sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/brandCar"
+                    android:id="@+id/countryCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/brand_car"
+                    android:hint="@string/country_code"
                     android:textSize="15sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/modelCar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/model_car"
-                    android:textSize="15sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/colorCar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/color_car"
-                    android:textSize="15sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/responsibleName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/responsible_name"
-                    android:textSize="15sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/apartment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/apartment"
-                    android:textSize="15sp" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/block"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/block"
-                    android:textSize="15sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/save_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@string/save_parking" />
+                    android:text="@string/save_mac_address" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

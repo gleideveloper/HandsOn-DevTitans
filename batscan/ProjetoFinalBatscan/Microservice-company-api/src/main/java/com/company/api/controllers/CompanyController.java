@@ -13,11 +13,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/mac-company")
+@RequestMapping("/mac-vendor")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -42,7 +41,7 @@ public class CompanyController {
         return companyModelOptional.
                 <ResponseEntity<Object>>map(
                 companyModel -> ResponseEntity.status(HttpStatus.OK).body(companyModel)).
-                orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found!"));
+                orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("MacPrefix not found!"));
     }
 
     @GetMapping()
@@ -52,12 +51,11 @@ public class CompanyController {
 
     @PostMapping("/save")
     public ResponseEntity<Object> saveCompany(@RequestBody @Valid CompanyDto companyDto) {
-        if (companyService.existsByMacAddress(companyDto.getMacAddress())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Mac Address is already exists!");
+        if (companyService.existsByMacAddress(companyDto.getMacPrefix())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: MacPrefix is already exists!");
         }
         var companyModel = new CompanyModel();
         BeanUtils.copyProperties(companyDto, companyModel);
-        companyModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.save(companyModel));
     }
 
@@ -65,22 +63,21 @@ public class CompanyController {
     public ResponseEntity<Object> deleteCompany(@PathVariable(value = "id") String id) {
         Optional<CompanyModel> companyModelOptional = companyService.findById(id);
         if (!companyModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("MacPrefix not found!");
         }
         companyService.delete(companyModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Company deleted successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body("MacPrefix deleted successfully!");
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateMacCompany(@PathVariable(value = "id") String id,
                                                     @RequestBody @Valid CompanyDto companyDto) {
         Optional<CompanyModel> companyModelOptional = companyService.findById(id);
         if (!companyModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("MacPrefix not found!");
         }
         var companyModel = new CompanyModel();
         BeanUtils.copyProperties(companyDto, companyModel);
-        companyModel.setMacAddress(companyModelOptional.get().getMacAddress());
-        companyModel.setRegistrationDate(companyModelOptional.get().getRegistrationDate());
+        companyModel.setMacPrefix(companyModelOptional.get().getMacPrefix());
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.save(companyModel));
     }
 }

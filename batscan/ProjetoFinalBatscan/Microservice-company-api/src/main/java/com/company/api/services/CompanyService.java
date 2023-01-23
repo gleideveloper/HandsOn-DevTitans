@@ -20,7 +20,7 @@ public class CompanyService {
         return companyRepository.save(companyModel);
     }
     public boolean existsByMacAddress(String Id) {
-        return companyRepository.existsByMacAddress(Id);
+        return companyRepository.existsByMacPrefix(Id);
     }
     public List<CompanyModel> findAll() {
         return companyRepository.findAll();

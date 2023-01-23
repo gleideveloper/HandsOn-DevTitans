@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">MyClientBatscan</string>
-    <string name="company_form">Formuláro de cadastro de Mac Address</string>
-    <string name="mac_address">Informe o Mac Address</string>
-    <string name="company_name">Informe nome do fabricante</string>
-    <string name="country_code">Informe o país do fabricante</string>
-    <string name="save_mac_address">Salvar Mac Address</string>
-</resources>

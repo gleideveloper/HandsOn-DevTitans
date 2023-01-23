@@ -8,12 +8,12 @@ import javax.validation.constraints.Size;
 @Data
 public class CompanyDto {
     @NotBlank
-    @Size(max = 17)
-    private String macAddress;
+    @Size(max = 10)
+    private String macPrefix;
     @NotBlank
-    @Size(max = 20)
-    private String companyName;
+    @Size(max = 50)
+    private String vendorName;
     @NotBlank
-    @Size(max = 2)
+    @Size(max = 5)
     private String countryCode;
 }

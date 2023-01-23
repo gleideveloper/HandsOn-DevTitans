@@ -18,11 +18,11 @@
         android:theme="@style/Theme.BatscanApp"
         tools:targetApi="31">
         <activity
-            android:name=".ListActivity"
+            android:name=".MacVendorListActivity"
             android:exported="false" />
 
         <activity
-            android:name=".MacVendorListActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

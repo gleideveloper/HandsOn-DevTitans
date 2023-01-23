@@ -2,7 +2,7 @@ package devtitans.batscanapp.models;
 
 import java.io.Serializable;
 
-public class MacVendorModel implements Serializable {
+public class MacVendorItemAdapterModel implements Serializable {
     private String rssi;
     private String macAddress;
     private String vendor;

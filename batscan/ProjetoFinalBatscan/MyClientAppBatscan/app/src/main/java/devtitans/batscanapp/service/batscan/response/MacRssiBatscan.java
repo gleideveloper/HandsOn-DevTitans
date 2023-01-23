@@ -12,4 +12,8 @@ public class MacRssiBatscan {
     public String getMacAddress() {
         return macAddress;
     }
+
+    public String getRssi() {
+        return rssi;
+    }
 }

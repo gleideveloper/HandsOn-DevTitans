@@ -9,28 +9,53 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import devtitans.batscanapp.R;
-import devtitans.batscanapp.models.MacVendorModel;
+import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.batscan.ServiceBatscan;
 import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
 import devtitans.batscanapp.service.network.response.MacVendorApiService;
 
 public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
-    private List<MacVendorModel> macVendorModelList;
+    private List<MacVendorItemAdapterModel> macVendorItemAdapterModelList;
     private List<MacVendorApiService> macVendorApiServiceList;
     private List<MacRssiBatscan> macRssiBatscanList;
     private ServiceBatscan serviceBatscan;
 
     public MacVendorAdapter(List<MacVendorApiService> macVendorApiServiceList) {
+        this.macVendorItemAdapterModelList = new ArrayList<>();
         this.macVendorApiServiceList = macVendorApiServiceList;
-        getRssiMacBatscan();
+        serviceBatscan = new ServiceBatscan();
+        loadMacVendorModelList();
     }
 
-    private void getRssiMacBatscan() {
-        serviceBatscan = new ServiceBatscan();
+    private void loadMacVendorModelList() {
         macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
+        //String mac = macRssiBatscanList.get(0).getMacAddress();
+        //String macPrefix = mac.replaceAll(":", "").substring(0,6);
+        for (MacRssiBatscan mac : macRssiBatscanList) {
+            MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
+            macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
+            macVendorItemAdapterModel.setRssi(mac.getRssi());
+            String macPrefix = mac.getMacAddress().replaceAll(":", "").substring(0, 6).toUpperCase();
+            MacVendorApiService macVendorApiService = macVendorApiServiceList.stream()
+                    .filter(o -> o.getMacPrefix().equals(macPrefix))
+                    .findFirst()
+                    .orElse(null);
+            if(macVendorApiService != null) {
+                macVendorItemAdapterModel.setVendor(macVendorApiService.getVendorName());
+                macVendorItemAdapterModel.setCountryCode(macVendorApiService.getCountryCode());
+                macVendorItemAdapterModel.setCamera(true);
+            }else{
+                macVendorItemAdapterModel.setVendor("Fabricante desconhecido");
+                macVendorItemAdapterModel.setCountryCode("XX");
+                macVendorItemAdapterModel.setCamera(false);
+            }
+            macVendorItemAdapterModelList.add(macVendorItemAdapterModel);
+        }
     }
+
     @NonNull
     @Override
     public MacVendorHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,15 +66,18 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MacVendorHolder holder, int position) {
-        MacVendorModel macVendorModel = macVendorModelList.get(position);
-        holder.rssi.setText(macVendorModel.getRssi());
-        holder.mac.setText(macVendorModel.getMacAddress());
-        holder.vendor.setText(macVendorModel.getVendor());
-        holder.countryCode.setText(macVendorModel.getCountryCode());
+        MacVendorItemAdapterModel macVendorItemAdapterModel = macVendorItemAdapterModelList.get(position);
+        holder.rssi.setText(macVendorItemAdapterModel.getRssi());
+        holder.mac.setText(macVendorItemAdapterModel.getMacAddress());
+        holder.vendor.setText(macVendorItemAdapterModel.getVendor());
+        holder.countryCode.setText(macVendorItemAdapterModel.getCountryCode());
+        if(!macVendorItemAdapterModel.isCamera()){
+            holder.isCamera.setText("Não é uma camera!!!");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return macVendorModelList.size();
+        return macVendorItemAdapterModelList.size();
     }
 }

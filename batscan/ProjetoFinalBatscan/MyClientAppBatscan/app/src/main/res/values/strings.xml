@@ -9,7 +9,7 @@
     <string name="mac_address">Mac Address</string>
     <string name="vendor">Vendor</string>
     <string name="country_code">Country Code</string>
-    <string name="is_camera">Possívelmente é uma camera!!!</string>
+    <string name="is_camera">Dispositivo possivelmente é uma camera</string>
 <!--    App antigo-->
     <string name="atualizar">atualizar</string>
     <string name="clique_em_atualizar">clique em atualizar para ver a lista de Dispositivos Wi-Fi</string>

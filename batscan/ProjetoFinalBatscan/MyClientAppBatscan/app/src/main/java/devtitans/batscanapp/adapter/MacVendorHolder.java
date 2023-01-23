@@ -18,6 +18,6 @@ public class MacVendorHolder extends RecyclerView.ViewHolder {
         mac = itemView.findViewById(R.id.macVendorListItem_mac);
         vendor = itemView.findViewById(R.id.macVendorListItem_vendor);
         countryCode = itemView.findViewById(R.id.macVendorListItem_country);
-        //isCamera = itemView.findViewById(R.id.macVendorListItem_isCamera);
+        isCamera = itemView.findViewById(R.id.macVendorListItem_isCamera);
     }
 }

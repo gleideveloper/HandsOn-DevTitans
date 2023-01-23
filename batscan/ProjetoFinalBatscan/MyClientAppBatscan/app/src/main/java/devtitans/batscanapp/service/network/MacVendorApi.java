@@ -1,6 +1,6 @@
 package devtitans.batscanapp.service.network;
 
-import devtitans.batscanapp.models.MacVendorModel;
+import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.network.response.MacVendorApiService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface MacVendorApi {
     Call<List<MacVendorApiService>> getAllMacVendors();
 
     @POST("/mac-vendor/save")
-    Call<MacVendorModel> saveMac(@Body MacVendorModel macVendorModel);
+    Call<MacVendorItemAdapterModel> saveMac(@Body MacVendorItemAdapterModel macVendorItemAdapterModel);
 
     @GET("/v2/macs/{mac}")
     Call<MacVendorApiService> getMacVendor(@Path("mac") String mac);

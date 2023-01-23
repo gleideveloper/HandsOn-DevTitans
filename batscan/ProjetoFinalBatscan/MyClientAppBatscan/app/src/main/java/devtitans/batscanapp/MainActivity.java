@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listarEquipamentos(View view) {
-        Intent intent = new Intent(this, ListActivity.class);
+        Intent intent = new Intent(this, MacVendorListActivity.class);
         startActivity(intent);
     }
 

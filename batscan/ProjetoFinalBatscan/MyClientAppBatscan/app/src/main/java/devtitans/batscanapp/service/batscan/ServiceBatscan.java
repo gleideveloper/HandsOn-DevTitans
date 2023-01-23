@@ -15,6 +15,7 @@ import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
 import devtitans.batscanmanager.BatscanManager;
 
 public class ServiceBatscan {
+    private final Integer MAX_REQUEST_MAC = 30;
     private BatscanManager manager;
     private List<MacRssiBatscan> macRssiBatscans = new ArrayList<>();
     private List<String> getRssiMacList = new ArrayList<>();
@@ -35,7 +36,7 @@ public class ServiceBatscan {
     }
 
     public void rssiMacListGetScan() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < MAX_REQUEST_MAC; i++) {
             try {
                 getRssiMacList.add(manager.getScan());
             } catch (android.os.RemoteException e) {

@@ -25,12 +25,14 @@ public class MacVendorListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_vendor_list);
-
         recyclerView = findViewById(R.id.mac_vendor_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
         getMacVendorApiServiceList();
     }
-
     private void getMacVendorApiServiceList() {
         ApiServiceRetrofit.getInstance()
                 .getAllMacVendors()

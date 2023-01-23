@@ -19,7 +19,6 @@ import retrofit2.Response;
 public class MacVendorListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MacVendorAdapter macVendorAdapter;
-    private List<MacVendorApiService> macVendorApiServiceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,7 @@ public class MacVendorListActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void populateListView(List<MacVendorApiService> body) {
-        macVendorApiServiceList = body;
+    private void populateListView(List<MacVendorApiService> macVendorApiServiceList) {
         macVendorAdapter = new MacVendorAdapter(macVendorApiServiceList);
         recyclerView.setAdapter(macVendorAdapter);
     }

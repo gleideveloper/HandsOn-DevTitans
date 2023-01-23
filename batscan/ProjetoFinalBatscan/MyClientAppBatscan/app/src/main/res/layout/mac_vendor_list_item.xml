@@ -52,11 +52,11 @@
         android:id="@+id/macVendorListItem_iconWifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="48dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/macVendorListItem_country"
-        app:srcCompat="@drawable/wifi" />
+        app:srcCompat="@drawable/ic_cam_wifi" />
 
     <TextView
         android:id="@+id/macVendorListItem_rssi"

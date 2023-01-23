@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import devtitans.batscanapp.R;
 import devtitans.batscanapp.models.MacVendorItemAdapterModel;
@@ -72,6 +71,7 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         holder.vendor.setText(macVendorItemAdapterModel.getVendor());
         holder.countryCode.setText(macVendorItemAdapterModel.getCountryCode());
         if(!macVendorItemAdapterModel.isCamera()){
+            holder.iconWifi.setImageResource(R.drawable.ic_wifi);
             holder.isCamera.setText("Não é uma camera!!!");
         }
     }

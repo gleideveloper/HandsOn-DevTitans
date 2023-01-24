@@ -7,11 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MacVendroMicroserviceRetrofit {
     private static MacVendorApi INSTANCE;
-
+    private static String BASE_URL_DEVTITANS = "http://10.208.1.63:8080";
+    private static String BASE_URL = "http://192.168.15.57:8080";
     public static MacVendorApi getInstance() {
         if (INSTANCE == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.15.57:8080")
+                    .baseUrl(BASE_URL_DEVTITANS)
                     .addConverterFactory(GsonConverterFactory.create(new Gson()))
                     .build();
             INSTANCE = retrofit.create(MacVendorApi.class);

@@ -13,7 +13,7 @@ public class ResponseBufferedReader<T> {
         this.response = response;
     }
 
-    public StringBuilder getResponse(){
+    public String getResponse(){
         assert response.errorBody() != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
         StringBuilder sb = new StringBuilder();
@@ -25,6 +25,6 @@ public class ResponseBufferedReader<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sb;
+        return sb.toString();
     }
 }

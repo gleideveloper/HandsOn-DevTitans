@@ -18,39 +18,39 @@ import devtitans.batscanapp.MacVendorActivity;
 import devtitans.batscanapp.R;
 import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.batscan.ServiceBatscan;
-import devtitans.batscanapp.service.batscan.response.MacRssiBatscanResponse;
-import devtitans.batscanapp.service.network.response.MacVendorMicroserviceResponse;
+import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
+import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 
 public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
     private Context context;
     private List<MacVendorItemAdapterModel> macVendorItemAdapterModelList;
-    private List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList;
-    private List<MacRssiBatscanResponse> macRssiBatscanResponseList;
+    private List<MacVendorMicroservice> macVendorMicroserviceList;
+    private List<MacRssiBatscan> macRssiBatscanList;
     private ServiceBatscan serviceBatscan;
 
-    public MacVendorAdapter(List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList, Context context) {
+    public MacVendorAdapter(List<MacVendorMicroservice> macVendorMicroserviceList, Context context) {
         this.context = context;
         this.macVendorItemAdapterModelList = new ArrayList<>();
-        this.macVendorMicroserviceResponseList = macVendorMicroserviceResponseList;
+        this.macVendorMicroserviceList = macVendorMicroserviceList;
         serviceBatscan = new ServiceBatscan();
         loadMacVendorModelList();
     }
 
     private void loadMacVendorModelList() {
-        macRssiBatscanResponseList = serviceBatscan.getRemoveMacDuplicated();
-        for (MacRssiBatscanResponse mac : macRssiBatscanResponseList) {
+        macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
+        for (MacRssiBatscan mac : macRssiBatscanList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
             macVendorItemAdapterModel.setRssi(mac.getRssi());
             String macPrefix = mac.getMacAddress().replaceAll(":", "").substring(0, 6).toUpperCase();
             macVendorItemAdapterModel.setMacPrefix(macPrefix);
-            MacVendorMicroserviceResponse macVendorMicroserviceResponse = macVendorMicroserviceResponseList.stream()
+            MacVendorMicroservice macVendorMicroservice = macVendorMicroserviceList.stream()
                     .filter(o -> o.getMacPrefix().equals(macPrefix))
                     .findFirst()
                     .orElse(null);
-            if (macVendorMicroserviceResponse != null) {
-                macVendorItemAdapterModel.setVendor(macVendorMicroserviceResponse.getVendorName());
-                macVendorItemAdapterModel.setCountryCode(macVendorMicroserviceResponse.getCountryCode());
+            if (macVendorMicroservice != null) {
+                macVendorItemAdapterModel.setVendor(macVendorMicroservice.getVendorName());
+                macVendorItemAdapterModel.setCountryCode(macVendorMicroservice.getCountryCode());
                 macVendorItemAdapterModel.setCamera(true);
             } else {
                 macVendorItemAdapterModel.setVendor("Fabricante desconhecido");

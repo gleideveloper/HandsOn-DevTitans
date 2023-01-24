@@ -10,7 +10,7 @@ import java.util.List;
 
 import devtitans.batscanapp.adapter.MacVendorAdapter;
 import devtitans.batscanapp.service.network.MacVendroMicroserviceRetrofit;
-import devtitans.batscanapp.service.network.response.MacVendorMicroserviceResponse;
+import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,9 +34,9 @@ public class MacVendorListActivity extends AppCompatActivity {
     private void getMacVendorApiServiceList() {
         MacVendroMicroserviceRetrofit.getInstance()
                 .getAllMacVendors()
-                .enqueue(new Callback<List<MacVendorMicroserviceResponse>>() {
+                .enqueue(new Callback<List<MacVendorMicroservice>>() {
                     @Override
-                    public void onResponse(Call<List<MacVendorMicroserviceResponse>> call, Response<List<MacVendorMicroserviceResponse>> response) {
+                    public void onResponse(Call<List<MacVendorMicroservice>> call, Response<List<MacVendorMicroservice>> response) {
                         if(response.isSuccessful()) {
                             assert response.body() != null;
                             populateListView(response.body());
@@ -44,13 +44,13 @@ public class MacVendorListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<List<MacVendorMicroserviceResponse>> call, Throwable t) {
+                    public void onFailure(Call<List<MacVendorMicroservice>> call, Throwable t) {
 
                     }
                 });
     }
-    private void populateListView(List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList) {
-        macVendorAdapter = new MacVendorAdapter(macVendorMicroserviceResponseList, this);
+    private void populateListView(List<MacVendorMicroservice> macVendorMicroserviceList) {
+        macVendorAdapter = new MacVendorAdapter(macVendorMicroserviceList, this);
         recyclerView.setAdapter(macVendorAdapter);
     }
 }

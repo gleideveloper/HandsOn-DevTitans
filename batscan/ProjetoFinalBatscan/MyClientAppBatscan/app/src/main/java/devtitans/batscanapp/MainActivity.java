@@ -20,5 +20,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MacVendorListActivity.class);
         startActivity(intent);
     }
-
 }

@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnScannear"
-        android:layout_width="156dp"
-        android:layout_height="65dp"
-        android:onClick="deviceList"
-        android:text="@string/scannear"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/txvTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
-        tools:ignore="OnClick" />
+        android:src="@drawable/card_team"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imvTelaPrincipal"
-        android:layout_width="167dp"
+        android:layout_width="176dp"
         android:layout_height="176dp"
         android:contentDescription="@string/buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvTeamName"
+        app:layout_constraintVertical_bias="0.37"
         app:srcCompat="@drawable/home_search" />
 
     <TextView
@@ -39,6 +39,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal" />
+
+    <Button
+        android:id="@+id/btnScannear"
+        android:layout_width="156dp"
+        android:layout_height="65dp"
+        android:onClick="deviceList"
+        android:text="@string/scannear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
+        app:layout_constraintVertical_bias="0.702"
+        tools:ignore="OnClick" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

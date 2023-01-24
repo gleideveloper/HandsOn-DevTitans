@@ -18,14 +18,14 @@ import devtitans.batscanapp.MacVendorActivity;
 import devtitans.batscanapp.R;
 import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.batscan.ServiceBatscan;
-import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
+import devtitans.batscanapp.service.batscan.response.MacRssiBatscanResponse;
 import devtitans.batscanapp.service.network.response.MacVendorMicroserviceResponse;
 
 public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
     private Context context;
     private List<MacVendorItemAdapterModel> macVendorItemAdapterModelList;
     private List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList;
-    private List<MacRssiBatscan> macRssiBatscanList;
+    private List<MacRssiBatscanResponse> macRssiBatscanResponseList;
     private ServiceBatscan serviceBatscan;
 
     public MacVendorAdapter(List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList, Context context) {
@@ -37,8 +37,8 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
     }
 
     private void loadMacVendorModelList() {
-        macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
-        for (MacRssiBatscan mac : macRssiBatscanList) {
+        macRssiBatscanResponseList = serviceBatscan.getRemoveMacDuplicated();
+        for (MacRssiBatscanResponse mac : macRssiBatscanResponseList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
             macVendorItemAdapterModel.setRssi(mac.getRssi());

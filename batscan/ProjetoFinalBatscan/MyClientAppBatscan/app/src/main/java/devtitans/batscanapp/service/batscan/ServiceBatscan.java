@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
+import devtitans.batscanapp.service.batscan.response.MacRssiBatscanResponse;
 import devtitans.batscanmanager.BatscanManager;
 
 public class ServiceBatscan {
     private final Integer MAX_REQUEST_MAC = 30;
     private BatscanManager manager;
-    private List<MacRssiBatscan> macRssiBatscans = new ArrayList<>();
+    private List<MacRssiBatscanResponse> macRssiBatscanResponses = new ArrayList<>();
     private List<String> getRssiMacList = new ArrayList<>();
 
     public ServiceBatscan() {
@@ -26,15 +26,15 @@ public class ServiceBatscan {
         ;
     }
 
-    public List<MacRssiBatscan> getRemoveMacDuplicated() {
+    public List<MacRssiBatscanResponse> getRemoveMacDuplicated() {
         rssiMacListGetScan();
         for (String s : getRssiMacList) {
             String[] data = s.split("\\|");
-            macRssiBatscans.add(new MacRssiBatscan(data[0], data[1]));
+            macRssiBatscanResponses.add(new MacRssiBatscanResponse(data[0], data[1]));
         }
-        return macRssiBatscans.stream()
+        return macRssiBatscanResponses.stream()
                 .collect(collectingAndThen(toCollection(
-                        () -> new TreeSet<>(comparing(MacRssiBatscan::getMacAddress))), ArrayList::new));
+                        () -> new TreeSet<>(comparing(MacRssiBatscanResponse::getMacAddress))), ArrayList::new));
     }
 
     public void rssiMacListGetScan() {

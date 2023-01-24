@@ -1,6 +1,6 @@
 package devtitans.batscanapp.service.network.response;
 
-public class MacVendorApiService {
+public class MacVendorMicroserviceResponse {
     private String macPrefix;
     private String vendorName;
     private String countryCode;

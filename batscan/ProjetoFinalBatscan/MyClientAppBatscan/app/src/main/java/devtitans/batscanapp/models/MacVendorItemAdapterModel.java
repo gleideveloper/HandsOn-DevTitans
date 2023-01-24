@@ -5,9 +5,18 @@ import java.io.Serializable;
 public class MacVendorItemAdapterModel implements Serializable {
     private String rssi;
     private String macAddress;
+    private String macPrefix;
     private String vendor;
     private String countryCode;
     private boolean isCamera;
+
+    public String getMacPrefix() {
+        return macPrefix;
+    }
+
+    public void setMacPrefix(String macPrefix) {
+        this.macPrefix = macPrefix;
+    }
 
     public String getRssi() {
         return rssi;

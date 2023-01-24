@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import devtitans.batscanapp.adapter.MacVendorAdapter;
-import devtitans.batscanapp.service.network.ApiServiceRetrofit;
-import devtitans.batscanapp.service.network.response.MacVendorApiService;
+import devtitans.batscanapp.service.network.MacVendroMicroserviceRetrofit;
+import devtitans.batscanapp.service.network.response.MacVendorMicroserviceResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,11 +32,11 @@ public class MacVendorListActivity extends AppCompatActivity {
         getMacVendorApiServiceList();
     }
     private void getMacVendorApiServiceList() {
-        ApiServiceRetrofit.getInstance()
+        MacVendroMicroserviceRetrofit.getInstance()
                 .getAllMacVendors()
-                .enqueue(new Callback<List<MacVendorApiService>>() {
+                .enqueue(new Callback<List<MacVendorMicroserviceResponse>>() {
                     @Override
-                    public void onResponse(Call<List<MacVendorApiService>> call, Response<List<MacVendorApiService>> response) {
+                    public void onResponse(Call<List<MacVendorMicroserviceResponse>> call, Response<List<MacVendorMicroserviceResponse>> response) {
                         if(response.isSuccessful()) {
                             assert response.body() != null;
                             populateListView(response.body());
@@ -45,13 +44,13 @@ public class MacVendorListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<List<MacVendorApiService>> call, Throwable t) {
+                    public void onFailure(Call<List<MacVendorMicroserviceResponse>> call, Throwable t) {
 
                     }
                 });
     }
-    private void populateListView(List<MacVendorApiService> macVendorApiServiceList) {
-        macVendorAdapter = new MacVendorAdapter(macVendorApiServiceList);
+    private void populateListView(List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList) {
+        macVendorAdapter = new MacVendorAdapter(macVendorMicroserviceResponseList, this);
         recyclerView.setAdapter(macVendorAdapter);
     }
 }

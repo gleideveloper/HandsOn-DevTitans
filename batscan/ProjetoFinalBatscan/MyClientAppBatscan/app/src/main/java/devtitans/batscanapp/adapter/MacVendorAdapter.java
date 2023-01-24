@@ -1,8 +1,12 @@
 package devtitans.batscanapp.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,21 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import devtitans.batscanapp.MacVendorActivity;
 import devtitans.batscanapp.R;
 import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.batscan.ServiceBatscan;
 import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
-import devtitans.batscanapp.service.network.response.MacVendorApiService;
+import devtitans.batscanapp.service.network.response.MacVendorMicroserviceResponse;
 
 public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
+    private Context context;
     private List<MacVendorItemAdapterModel> macVendorItemAdapterModelList;
-    private List<MacVendorApiService> macVendorApiServiceList;
+    private List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList;
     private List<MacRssiBatscan> macRssiBatscanList;
     private ServiceBatscan serviceBatscan;
 
-    public MacVendorAdapter(List<MacVendorApiService> macVendorApiServiceList) {
+    public MacVendorAdapter(List<MacVendorMicroserviceResponse> macVendorMicroserviceResponseList, Context context) {
+        this.context = context;
         this.macVendorItemAdapterModelList = new ArrayList<>();
-        this.macVendorApiServiceList = macVendorApiServiceList;
+        this.macVendorMicroserviceResponseList = macVendorMicroserviceResponseList;
         serviceBatscan = new ServiceBatscan();
         loadMacVendorModelList();
     }
@@ -36,15 +43,16 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
             macVendorItemAdapterModel.setRssi(mac.getRssi());
             String macPrefix = mac.getMacAddress().replaceAll(":", "").substring(0, 6).toUpperCase();
-            MacVendorApiService macVendorApiService = macVendorApiServiceList.stream()
+            macVendorItemAdapterModel.setMacPrefix(macPrefix);
+            MacVendorMicroserviceResponse macVendorMicroserviceResponse = macVendorMicroserviceResponseList.stream()
                     .filter(o -> o.getMacPrefix().equals(macPrefix))
                     .findFirst()
                     .orElse(null);
-            if(macVendorApiService != null) {
-                macVendorItemAdapterModel.setVendor(macVendorApiService.getVendorName());
-                macVendorItemAdapterModel.setCountryCode(macVendorApiService.getCountryCode());
+            if (macVendorMicroserviceResponse != null) {
+                macVendorItemAdapterModel.setVendor(macVendorMicroserviceResponse.getVendorName());
+                macVendorItemAdapterModel.setCountryCode(macVendorMicroserviceResponse.getCountryCode());
                 macVendorItemAdapterModel.setCamera(true);
-            }else{
+            } else {
                 macVendorItemAdapterModel.setVendor("Fabricante desconhecido");
                 macVendorItemAdapterModel.setCountryCode("XX");
                 macVendorItemAdapterModel.setCamera(false);
@@ -68,10 +76,20 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         holder.mac.setText(macVendorItemAdapterModel.getMacAddress());
         holder.vendor.setText(macVendorItemAdapterModel.getVendor());
         holder.countryCode.setText(macVendorItemAdapterModel.getCountryCode());
-        if(macVendorItemAdapterModel.isCamera()){
+        if (macVendorItemAdapterModel.isCamera()) {
             holder.iconWifi.setImageResource(R.drawable.ic_cam_wifi);
-            holder.isCamera.setText("Possivelmente é uma câmera!!!");
+            holder.isCamera.setText(R.string.is_camera);
         }
+        holder.itemView.setOnClickListener(view -> {
+            Bundle saveData = new Bundle();
+            saveData.putString("macPrefix", macVendorItemAdapterModel.getMacPrefix());
+            saveData.putString("vendor", macVendorItemAdapterModel.getVendor());
+            saveData.putString("countryCode", macVendorItemAdapterModel.getCountryCode());
+            Toast.makeText(context, macVendorItemAdapterModel.getMacAddress(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, MacVendorActivity.class);
+            intent.putExtras(saveData);
+            context.startActivity(intent);
+        });
     }
 
     @Override

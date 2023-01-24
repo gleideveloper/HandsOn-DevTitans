@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import devtitans.batscanapp.R;
 
-public class MacVendorHolder extends RecyclerView.ViewHolder {
+public class MacVendorHolder extends RecyclerView.ViewHolder{
     protected TextView rssi, mac, vendor, countryCode, isCamera;
     protected ImageView iconWifi;
     public MacVendorHolder(@NonNull View itemView) {

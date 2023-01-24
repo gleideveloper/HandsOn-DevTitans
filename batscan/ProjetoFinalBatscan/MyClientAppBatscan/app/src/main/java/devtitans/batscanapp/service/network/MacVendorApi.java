@@ -18,11 +18,6 @@ public interface MacVendorApi {
     Call<List<MacVendorApiService>> getAllMacVendors();
 
     @POST("/mac-vendor/save")
-    Call<MacVendorItemAdapterModel> saveMac(@Body MacVendorItemAdapterModel macVendorItemAdapterModel);
+    Call<MacVendorApiService> saveMac(@Body MacVendorApiService macVendorApiService);
 
-    @GET("/v2/macs/{mac}")
-    Call<MacVendorApiService> getMacVendor(@Path("mac") String mac);
-
-    @GET("/v1")
-    Call<MacVendorApiService> getVendorDetails(@QueryMap Map<String, String> params);
 }

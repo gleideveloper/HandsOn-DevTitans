@@ -5,6 +5,7 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
+import android.os.RemoteException;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class ServiceBatscan {
     private List<String> getRssiMacList = new ArrayList<>();
 
     public ServiceBatscan() {
-        this.manager = BatscanManager.getInstance();;
+        this.manager = BatscanManager.getInstance();
+        ;
     }
 
     public List<MacRssiBatscan> getRemoveMacDuplicated() {
@@ -45,5 +47,14 @@ public class ServiceBatscan {
                 getRssiMacList.add("-86|00:1B:44:11:3A:B7");
             }
         }
+    }
+
+    public boolean conected() {
+        try {
+            return manager.connect() == 1;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

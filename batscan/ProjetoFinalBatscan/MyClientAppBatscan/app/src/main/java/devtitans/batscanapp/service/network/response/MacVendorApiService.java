@@ -1,7 +1,5 @@
 package devtitans.batscanapp.service.network.response;
 
-import androidx.annotation.Nullable;
-
 public class MacVendorApiService {
     private String macPrefix;
     private String vendorName;

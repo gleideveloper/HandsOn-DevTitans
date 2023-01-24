@@ -4,14 +4,13 @@
     <string name="mac_prefix_form">Informe o mac prefix</string>
     <string name="vendor_form">Informe nome do fabricante</string>
     <string name="country_code_form">Informe o código país do fabricante</string>
-    <string name="save_mac_vendor_form">Salvar Mac Address</string>
+    <string name="save_mac_vendor_form">Salvar Mac Vendor</string>
     <string name="rssi">Rssi</string>
     <string name="mac_address">Mac Address</string>
     <string name="vendor">Vendor</string>
     <string name="country_code">Country Code</string>
-    <string name="is_camera">Dispositivo possivelmente é uma camera</string>
-<!--    App antigo-->
-    <string name="atualizar">atualizar</string>
+    <string name="is_camera">Não é uma câmera</string>
+    <string name="scannear">BatScan</string>
     <string name="clique_em_atualizar">clique em atualizar para ver a lista de Dispositivos Wi-Fi</string>
     <string name="buscar">buscar</string>
     <string name="macadress">MacAdress</string>

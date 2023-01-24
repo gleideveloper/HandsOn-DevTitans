@@ -31,8 +31,6 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
 
     private void loadMacVendorModelList() {
         macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
-        //String mac = macRssiBatscanList.get(0).getMacAddress();
-        //String macPrefix = mac.replaceAll(":", "").substring(0,6);
         for (MacRssiBatscan mac : macRssiBatscanList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
@@ -70,9 +68,9 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         holder.mac.setText(macVendorItemAdapterModel.getMacAddress());
         holder.vendor.setText(macVendorItemAdapterModel.getVendor());
         holder.countryCode.setText(macVendorItemAdapterModel.getCountryCode());
-        if(!macVendorItemAdapterModel.isCamera()){
-            holder.iconWifi.setImageResource(R.drawable.ic_wifi);
-            holder.isCamera.setText("Não é uma camera!!!");
+        if(macVendorItemAdapterModel.isCamera()){
+            holder.iconWifi.setImageResource(R.drawable.ic_cam_wifi);
+            holder.isCamera.setText("Possivelmente é uma câmera!!!");
         }
     }
 

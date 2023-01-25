@@ -40,5 +40,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    /* Libs: devtitans.batscanmanager.jar -> Serviço que prover a comunicação com o Esp32 */
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

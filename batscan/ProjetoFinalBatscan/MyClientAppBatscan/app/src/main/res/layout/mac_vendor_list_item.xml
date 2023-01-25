@@ -17,75 +17,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/macVendorListItem_mac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="@string/mac_address"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/macVendorListItem_vendor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="@string/vendor"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/macVendorListItem_mac" />
+                <TextView
+                    android:id="@+id/macVendorListItem_vendor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_cardview_item2"
+                    android:text="@string/vendor"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/macVendorListItem_isCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginStart="20dp"
-                android:text="@string/isNot_camera"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/macVendorListItem_vendor" />
+                <TextView
+                    android:id="@+id/macVendorListItem_isCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_cardview_item2"
+                    android:layout_marginBottom="@dimen/margin_cardview_item2"
+                    android:text="@string/isNot_camera"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/macVendorListItem_country"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginEnd="48dp"
-                android:text="@string/country_code"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/macVendorListItem_mac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_cardview_item1"
+                    android:text="@string/mac_address"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/macVendorListItem_iconWifi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                android:clickable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/macVendorListItem_country"
-                app:srcCompat="@drawable/ic_wifi" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/macVendorListItem_rssi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                android:text="@string/rssi"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/macVendorListItem_iconWifi" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/macVendorListItem_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_marginBottom="@dimen/margin_cardview_item1"
+                    android:text="@string/country_code"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/macVendorListItem_iconWifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_wifi" />
+
+                <TextView
+                    android:id="@+id/macVendorListItem_rssi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_cardview_item1"
+                    android:layout_marginBottom="@dimen/margin_cardview_item2"
+                    android:text="@string/rssi"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

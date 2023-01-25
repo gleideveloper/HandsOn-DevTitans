@@ -1,15 +1,19 @@
 package devtitans.batscanapp;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import devtitans.batscanapp.adapter.MacVendorAdapter;
-import devtitans.batscanapp.service.network.MacVendroMicroserviceRetrofit;
+import devtitans.batscanapp.service.network.MacVendorMicroserviceRetrofit;
 import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,20 +36,20 @@ public class MacVendorListActivity extends AppCompatActivity {
         getMacVendorApiServiceList();
     }
     private void getMacVendorApiServiceList() {
-        MacVendroMicroserviceRetrofit.getInstance()
+        MacVendorMicroserviceRetrofit.getInstance()
                 .getAllMacVendors()
                 .enqueue(new Callback<List<MacVendorMicroservice>>() {
                     @Override
-                    public void onResponse(Call<List<MacVendorMicroservice>> call, Response<List<MacVendorMicroservice>> response) {
+                    public void onResponse(@NonNull Call<List<MacVendorMicroservice>> call, @NonNull Response<List<MacVendorMicroservice>> response) {
                         if(response.isSuccessful()) {
-                            assert response.body() != null;
                             populateListView(response.body());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<MacVendorMicroservice>> call, Throwable t) {
-
+                    public void onFailure(@NonNull Call<List<MacVendorMicroservice>> call, @NonNull Throwable t) {
+                        Toast.makeText(MacVendorListActivity.this, "Deleted failed!!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(MacVendorListActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
                     }
                 });
     }

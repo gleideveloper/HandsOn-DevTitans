@@ -2,7 +2,9 @@ package devtitans.batscanapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +35,11 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         this.macVendorItemAdapterModelList = new ArrayList<>();
         this.macVendorMicroserviceList = macVendorMicroserviceList;
         serviceBatscan = new ServiceBatscan();
+        macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
         loadMacVendorModelList();
     }
 
     private void loadMacVendorModelList() {
-        macRssiBatscanList = serviceBatscan.getRemoveMacDuplicated();
         for (MacRssiBatscan mac : macRssiBatscanList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
@@ -53,8 +55,8 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
                 macVendorItemAdapterModel.setCountryCode(macVendorMicroservice.getCountryCode());
                 macVendorItemAdapterModel.setCamera(true);
             } else {
-                macVendorItemAdapterModel.setVendor("Fabricante desconhecido");
-                macVendorItemAdapterModel.setCountryCode("XX");
+                macVendorItemAdapterModel.setVendor("Desconhecido");
+                macVendorItemAdapterModel.setCountryCode(String.valueOf("XX"));
                 macVendorItemAdapterModel.setCamera(false);
             }
             macVendorItemAdapterModelList.add(macVendorItemAdapterModel);
@@ -77,7 +79,9 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         holder.vendor.setText(macVendorItemAdapterModel.getVendor());
         holder.countryCode.setText(macVendorItemAdapterModel.getCountryCode());
         if (macVendorItemAdapterModel.isCamera()) {
+            holder.vendor.setTextColor(Color.RED);
             holder.iconWifi.setImageResource(R.drawable.ic_cam_wifi);
+            holder.isCamera.setTextColor(Color.RED);
             holder.isCamera.setText(R.string.is_camera);
         }
         holder.itemView.setOnClickListener(view -> {

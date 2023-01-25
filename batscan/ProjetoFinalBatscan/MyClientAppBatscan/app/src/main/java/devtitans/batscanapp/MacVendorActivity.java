@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import devtitans.batscanapp.bufferedreader.ResponseBufferedReader;
-import devtitans.batscanapp.service.network.MacVendroMicroserviceRetrofit;
+import devtitans.batscanapp.service.network.MacVendorMicroserviceRetrofit;
 import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,7 +42,7 @@ public class MacVendorActivity extends AppCompatActivity {
 
     public void saveMac(View view) {
         macVendorMicroservice = getMacVendorMicroservice();
-        MacVendroMicroserviceRetrofit.getInstance()
+        MacVendorMicroserviceRetrofit.getInstance()
                 .saveMac(macVendorMicroservice)
                 .enqueue(new Callback<MacVendorMicroservice>() {
                     @Override
@@ -64,7 +64,7 @@ public class MacVendorActivity extends AppCompatActivity {
     }
 
     public void deleteMac(View view) {
-        MacVendroMicroserviceRetrofit.getInstance()
+        MacVendorMicroserviceRetrofit.getInstance()
                 .deleteMac(macPrefix.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -78,7 +78,7 @@ public class MacVendorActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Toast.makeText(MacVendorActivity.this, "Deleted failed!!!", Toast.LENGTH_SHORT).show();
                         Logger.getLogger(MacVendorActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
                     }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "TBL_VENDOR_MAC")
+@Table(name = "TBL_MAC_VENDOR")
 public class CompanyModel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="125dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/card_team"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/card_team"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -24,21 +24,32 @@
         android:contentDescription="@string/buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvTeamName"
-        app:layout_constraintVertical_bias="0.37"
+        app:layout_constraintVertical_bias="0.11"
         app:srcCompat="@drawable/home_search" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txvStatusBatscan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/desconectadoBatscan"
+        app:layout_constraintBottom_toTopOf="@+id/btnScannear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
+        app:layout_constraintVertical_bias="0.358" />
+
+    <TextView
+        android:id="@+id/txvAviso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/clique_em_atualizar"
         app:layout_constraintBottom_toTopOf="@+id/btnScannear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal" />
+        app:layout_constraintTop_toBottomOf="@+id/txvStatusBatscan" />
 
     <Button
         android:id="@+id/btnScannear"
@@ -48,10 +59,8 @@
         android:text="@string/scannear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
-        app:layout_constraintVertical_bias="0.702"
+        app:layout_constraintTop_toBottomOf="@+id/txvAviso"
         tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

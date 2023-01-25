@@ -2,14 +2,10 @@ package devtitans.batscanapp.service.network;
 
 import com.google.gson.Gson;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MacVendroMicroserviceRetrofit {
+public class MacVendorMicroserviceRetrofit {
     private static MacVendorApi INSTANCE;
     private static String BASE_URL_DEVTITANS = "http://10.208.1.63:8080";
     private static String BASE_URL = "http://192.168.15.57:8080";

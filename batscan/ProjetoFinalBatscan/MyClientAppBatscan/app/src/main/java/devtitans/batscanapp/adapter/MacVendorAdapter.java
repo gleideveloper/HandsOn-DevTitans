@@ -43,7 +43,7 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         for (MacRssiBatscan mac : macRssiBatscanList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
-            macVendorItemAdapterModel.setRssi(mac.getRssi());
+            macVendorItemAdapterModel.setRssi(mac.getRssi().replace("-",""));
             String macPrefix = mac.getMacAddress().replaceAll(":", "").substring(0, 6).toUpperCase();
             macVendorItemAdapterModel.setMacPrefix(macPrefix);
             MacVendorMicroservice macVendorMicroservice = macVendorMicroserviceList.stream()

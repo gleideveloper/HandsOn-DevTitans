@@ -23,7 +23,6 @@ public class ServiceBatscan {
 
     public ServiceBatscan() {
         this.manager = BatscanManager.getInstance();
-        ;
     }
 
     public List<MacRssiBatscan> getRemoveMacDuplicated() {
@@ -48,10 +47,9 @@ public class ServiceBatscan {
             }
         }
     }
-
-    public boolean conected() {
+    public boolean isConnected() {
         try {
-            return manager.connect() == 1;
+            if (manager.connect() == 1) return true;
         } catch (RemoteException e) {
             e.printStackTrace();
         }

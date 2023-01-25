@@ -63,26 +63,28 @@
                     android:layout_marginTop="10dp"
                     android:hint="@string/country_code_form"
                     android:textSize="15sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSave"
-                        android:layout_marginLeft="75dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="75dp"
                         android:onClick="saveMac"
                         android:text="@string/save_mac_vendor_form"
                         tools:ignore="OnClick" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDel"
-                        android:layout_marginLeft="30dp"
-                        android:onClick="deleteMac"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:onClick="deleteMac"
                         android:text="@string/del_mac_vendor_form"
                         tools:ignore="OnClick" />
                 </LinearLayout>

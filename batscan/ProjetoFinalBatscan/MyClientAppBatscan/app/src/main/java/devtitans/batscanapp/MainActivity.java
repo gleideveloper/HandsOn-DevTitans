@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setEstadoEsp32();
+        homeSeachIcon.setOnClickListener(view -> setEstadoEsp32());
+    }
+
+    private void setEstadoEsp32() {
         if(serviceBatscan.isConnected()){
             homeSeachIcon.setImageResource(R.drawable.home_search_on);
             statusBatscan.setText("Conectado com Esp32!");
@@ -37,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             statusBatscan.setText("Desconectado!");
         }
     }
-
 
     public void deviceList(View view) {
         Intent intent = new Intent(this, MacVendorListActivity.class);

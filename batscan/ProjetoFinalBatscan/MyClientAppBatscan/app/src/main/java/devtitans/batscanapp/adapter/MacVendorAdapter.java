@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
         for (MacRssiBatscan mac : macRssiBatscanList) {
             MacVendorItemAdapterModel macVendorItemAdapterModel = new MacVendorItemAdapterModel();
             macVendorItemAdapterModel.setMacAddress(mac.getMacAddress());
-            macVendorItemAdapterModel.setRssi(mac.getRssi().replace("-",""));
+            macVendorItemAdapterModel.setRssi(mac.getRssi().replace("-", ""));
             String macPrefix = mac.getMacAddress().replaceAll(":", "").substring(0, 6).toUpperCase();
             macVendorItemAdapterModel.setMacPrefix(macPrefix);
             MacVendorMicroservice macVendorMicroservice = macVendorMicroserviceList.stream()

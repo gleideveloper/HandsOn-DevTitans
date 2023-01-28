@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvTeamName"
-        app:layout_constraintVertical_bias="0.372"
+        app:layout_constraintVertical_bias="0.302"
         app:srcCompat="@drawable/home_search_off" />
 
     <TextView
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
-        app:layout_constraintVertical_bias="0.169" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <TextView
         android:id="@+id/txvAviso"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvStatusBatscan"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.866" />
 
     <Button
         android:id="@+id/btnScannear"
@@ -64,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
-        app:layout_constraintVertical_bias="0.784"
+        app:layout_constraintVertical_bias="0.59"
         tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

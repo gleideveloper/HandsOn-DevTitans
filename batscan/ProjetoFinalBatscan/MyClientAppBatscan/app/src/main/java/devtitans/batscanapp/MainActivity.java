@@ -25,22 +25,21 @@ public class MainActivity extends AppCompatActivity {
         statusBatscan = findViewById(R.id.txvStatusBatscan);
         btnBatScan = findViewById(R.id.btnScannear);
         serviceBatscan = new ServiceBatscan();
-        btnBatScan.setEnabled(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setEstadoEsp32();
-        homeSeachIcon.setOnClickListener(view -> setEstadoEsp32());
+        checkIsConnectedEsp32();
+        homeSeachIcon.setOnClickListener(view -> checkIsConnectedEsp32());
     }
 
-    private void setEstadoEsp32() {
-        if(serviceBatscan.isConnected()){
+    private void checkIsConnectedEsp32() {
+        if (serviceBatscan.isConnected()) {
             homeSeachIcon.setImageResource(R.drawable.home_search_on);
             statusBatscan.setText("Conectado com Esp32!");
             btnBatScan.setEnabled(true);
-        }else{
+        } else {
             homeSeachIcon.setImageResource(R.drawable.home_search_off);
             statusBatscan.setText("Desconectado!");
             btnBatScan.setEnabled(false);

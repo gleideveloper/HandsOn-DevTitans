@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/txvTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/card_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imvTelaPrincipal"
+        android:layout_width="176dp"
+        android:layout_height="176dp"
+        android:contentDescription="@string/buscar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvTeamName"
+        app:layout_constraintVertical_bias="0.302"
+        app:srcCompat="@drawable/home_search_off" />
+
+    <TextView
+        android:id="@+id/txvStatusBatscan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/desconectadoBatscan"
+        app:layout_constraintBottom_toTopOf="@+id/btnScannear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
+        app:layout_constraintVertical_bias="0.328" />
+
+    <TextView
+        android:id="@+id/txvAviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clique_em_atualizar"
+        app:layout_constraintBottom_toTopOf="@+id/btnScannear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvStatusBatscan"
+        app:layout_constraintVertical_bias="0.866" />
+
+    <Button
+        android:id="@+id/btnScannear"
+        android:layout_width="156dp"
+        android:layout_height="65dp"
+        android:onClick="deviceList"
+        android:text="@string/scannear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imvTelaPrincipal"
+        app:layout_constraintVertical_bias="0.59"
+        tools:ignore="OnClick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

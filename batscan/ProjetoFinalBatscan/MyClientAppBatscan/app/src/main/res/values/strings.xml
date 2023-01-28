@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MyClientBatscan</string>
+    <string name="title_mac_vendor_form">Formuláro de cadastro de Mac Vendor </string>
+    <string name="mac_prefix_form">Informe o mac prefix</string>
+    <string name="vendor_form">Informe nome do fabricante</string>
+    <string name="country_code_form">Informe o código país do fabricante</string>
+    <string name="save_mac_vendor_form">Salvar</string>
+    <string name="del_mac_vendor_form">Deletar</string>
+    <string name="rssi">Rssi</string>
+    <string name="mac_address">Mac Address</string>
+    <string name="vendor">Vendor</string>
+    <string name="country_code">Code</string>
+    <string name="isNot_camera">Não é uma câmera!</string>
+    <string name="is_camera">"Possivelmente é uma câmera!"</string>
+    <string name="scannear">BatScan</string>
+    <string name="clique_em_atualizar">Listar dispositivos Wi-Fi</string>
+    <string name="buscar">buscar</string>
+    <string name="macadress">MacAdress</string>
+    <string name="desconectadoBatscan">Desconectado</string>
+</resources>

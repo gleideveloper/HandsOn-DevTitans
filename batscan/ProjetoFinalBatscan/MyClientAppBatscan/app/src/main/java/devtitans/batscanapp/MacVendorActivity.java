@@ -34,8 +34,6 @@ public class MacVendorActivity extends AppCompatActivity {
         countryCode = findViewById(R.id.countryCode);
         Bundle receivedData = getIntent().getExtras();
         macPrefix.setText(receivedData.getString("macPrefix"));
-//        vendor.setText(receivedData.getString("vendor"));
-//        countryCode.setText(receivedData.getString("countryCode"));
         saveMacVendor = findViewById(R.id.btnSave);
         delMacVendor = findViewById(R.id.btnDel);
     }

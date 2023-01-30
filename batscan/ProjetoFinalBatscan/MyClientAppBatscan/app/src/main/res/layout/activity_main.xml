@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/txvTeamName"
-        android:layout_width="wrap_content"
-        android:layout_height="125dp"
+        android:layout_width="584px"
+        android:layout_height="768px"
         android:layout_marginTop="20dp"
-        android:src="@drawable/card_team"
+        android:src="@drawable/img_team"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvTeamName"
-        app:layout_constraintVertical_bias="0.302"
+        app:layout_constraintVertical_bias="0.213"
         app:srcCompat="@drawable/home_search_off" />
 
     <TextView

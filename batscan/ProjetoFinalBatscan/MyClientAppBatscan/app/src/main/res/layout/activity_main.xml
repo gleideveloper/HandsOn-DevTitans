@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/txvTeamName"
-        android:layout_width="584px"
-        android:layout_height="768px"
+        android:layout_width="568px"
+        android:layout_height="766px"
         android:layout_marginTop="20dp"
         android:src="@drawable/img_team"
         app:layout_constraintEnd_toEndOf="parent"

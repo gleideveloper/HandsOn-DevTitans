@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import devtitans.batscanapp.adapter.MacVendorAdapter;
-import devtitans.batscanapp.service.network.MacVendorMicroserviceRetrofit;
+import devtitans.batscanapp.service.network.MicroserviceRetrofit;
 import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,7 +48,7 @@ public class MacVendorListActivity extends AppCompatActivity {
     }
 
     private void getMacVendorApiServiceList() {
-        MacVendorMicroserviceRetrofit.getInstance()
+        MicroserviceRetrofit.getInstance()
                 .getAllMacVendors()
                 .enqueue(new Callback<List<MacVendorMicroservice>>() {
                     @Override

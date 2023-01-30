@@ -31,19 +31,30 @@ public class MainActivity extends AppCompatActivity {
         btnBatScan = findViewById(R.id.btnScannear);
         serviceBatscan = new ServiceBatscan();
 
-        /*IntenFilter do estado da conexção UBS*/
+        /*IntenFilter pega o estado da conexção UBS*/
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.hardware.usb.action.USB_STATE");
         registerReceiver(receiver, filter);
     }
+
+    /*BroadcastReceiver evento para receber o estado da conexão USB*/
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getExtras().getBoolean("connected")) {
+                //start doing something for state - connected
+                checkIsConnectedEsp32();
+            } else {
+                //start doing something for state - disconnected
+                checkIsConnectedEsp32();
+            }
+        }
+    };
+
     @Override
     protected void onResume() {
         super.onResume();
         homeSeachIcon.setOnClickListener(view -> checkIsConnectedEsp32());
-    }
-    public void deviceList(View view) {
-        Intent intent = new Intent(this, MacVendorListActivity.class);
-        startActivity(intent);
     }
 
     private void checkIsConnectedEsp32() {
@@ -62,19 +73,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*BroadcastReceiver para ficar ouvindo a conexão USB*/
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getExtras().getBoolean("connected")) {
-                //start doing something for state - connected
-                checkIsConnectedEsp32();
-            } else {
-                //start doing something for state - disconnected
-                checkIsConnectedEsp32();
-            }
-        }
-    };
-
-
+    public void deviceList(View view) {
+        Intent intent = new Intent(this, MacVendorListActivity.class);
+        startActivity(intent);
+    }
 }

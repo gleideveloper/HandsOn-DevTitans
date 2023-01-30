@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import devtitans.batscanapp.bufferedreader.ResponseBufferedReader;
-import devtitans.batscanapp.service.network.MacVendorMicroserviceRetrofit;
+import devtitans.batscanapp.service.network.MicroserviceRetrofit;
 import devtitans.batscanapp.service.network.response.MacVendorMicroservice;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,7 +42,7 @@ public class MacVendorActivity extends AppCompatActivity {
 
     public void saveMac(View view) {
         macVendorMicroservice = getMacVendorMicroservice();
-        MacVendorMicroserviceRetrofit.getInstance()
+        MicroserviceRetrofit.getInstance()
                 .saveMac(macVendorMicroservice)
                 .enqueue(new Callback<MacVendorMicroservice>() {
                     @Override
@@ -64,7 +64,7 @@ public class MacVendorActivity extends AppCompatActivity {
     }
 
     public void deleteMac(View view) {
-        MacVendorMicroserviceRetrofit.getInstance()
+        MicroserviceRetrofit.getInstance()
                 .deleteMac(macPrefix.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override

@@ -16,10 +16,9 @@ import devtitans.batscanapp.service.batscan.response.MacRssiBatscan;
 import devtitans.batscanmanager.BatscanManager;
 
 public class ServiceBatscan {
-    private final Integer MAX_REQUEST_MAC = 30;
-    private BatscanManager manager;
-    private List<MacRssiBatscan> macRssiBatscanRespons = new ArrayList<>();
-    private List<String> getRssiMacList = new ArrayList<>();
+    private final BatscanManager manager;
+    private final List<MacRssiBatscan> macRssiBatscanRespons = new ArrayList<>();
+    private final List<String> getRssiMacList = new ArrayList<>();
 
     public ServiceBatscan() {
         this.manager = BatscanManager.getInstance();
@@ -37,6 +36,7 @@ public class ServiceBatscan {
     }
 
     public void rssiMacListGetScan() {
+        int MAX_REQUEST_MAC = 30;
         for (int i = 0; i < MAX_REQUEST_MAC; i++) {
             try {
                 getRssiMacList.add(manager.getScan());

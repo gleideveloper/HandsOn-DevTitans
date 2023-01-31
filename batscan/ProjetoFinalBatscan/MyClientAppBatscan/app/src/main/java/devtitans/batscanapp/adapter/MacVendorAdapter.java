@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import devtitans.batscanapp.MacVendorActivity;
+import devtitans.batscanapp.MacVendorFormActivity;
 import devtitans.batscanapp.R;
 import devtitans.batscanapp.models.MacVendorItemAdapterModel;
 import devtitans.batscanapp.service.batscan.ServiceBatscan;
@@ -89,7 +89,7 @@ public class MacVendorAdapter extends RecyclerView.Adapter<MacVendorHolder> {
             saveData.putString("vendor", macVendorItemAdapterModel.getVendor());
             saveData.putString("countryCode", macVendorItemAdapterModel.getCountryCode());
             Toast.makeText(context, macVendorItemAdapterModel.getMacAddress(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(context, MacVendorActivity.class);
+            Intent intent = new Intent(context, MacVendorFormActivity.class);
             intent.putExtras(saveData);
             context.startActivity(intent);
         });

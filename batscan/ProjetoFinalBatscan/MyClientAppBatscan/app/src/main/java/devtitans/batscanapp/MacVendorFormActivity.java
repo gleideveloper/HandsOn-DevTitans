@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MacVendorActivity extends AppCompatActivity {
+public class MacVendorFormActivity extends AppCompatActivity {
     private Button saveMacVendor, delMacVendor;
     private EditText macPrefix, vendor, countryCode;
     private MacVendorMicroservice macVendorMicroservice;
@@ -46,17 +46,17 @@ public class MacVendorActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<MacVendorMicroservice> call, @NonNull Response<MacVendorMicroservice> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(MacVendorActivity.this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MacVendorFormActivity.this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
                         } else {
                             ResponseBufferedReader<MacVendorMicroservice> responseBody = new ResponseBufferedReader<>(response);
-                            Toast.makeText(MacVendorActivity.this, responseBody.getResponse(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MacVendorFormActivity.this, responseBody.getResponse(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<MacVendorMicroservice> call, Throwable t) {
-                        Toast.makeText(MacVendorActivity.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
-                        Logger.getLogger(MacVendorActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
+                        Toast.makeText(MacVendorFormActivity.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(MacVendorFormActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
                     }
                 });
     }
@@ -68,17 +68,17 @@ public class MacVendorActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(MacVendorActivity.this, "Deletado com Sucesso!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MacVendorFormActivity.this, "Deletado com Sucesso!", Toast.LENGTH_SHORT).show();
                         } else {
                             ResponseBufferedReader<ResponseBody> responseBody = new ResponseBufferedReader<>(response);
-                            Toast.makeText(MacVendorActivity.this, responseBody.getResponse(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MacVendorFormActivity.this, responseBody.getResponse(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                        Toast.makeText(MacVendorActivity.this, "Deleted failed!!!", Toast.LENGTH_SHORT).show();
-                        Logger.getLogger(MacVendorActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
+                        Toast.makeText(MacVendorFormActivity.this, "Deleted failed!!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(MacVendorFormActivity.class.getName()).log(Level.SEVERE, "Error occurred!!!");
                     }
                 });
     }
